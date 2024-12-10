@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1g4ezgi" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.28.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
+  <decision id="Decision_SL" name="Decision 1">
+    <informationRequirement id="InformationRequirement_1ew4l3e">
+      <requiredDecision href="#price_validation" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1rbw8c6">
+      <requiredDecision href="#risk_validation" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1tg6x06">
+      <requiredDecision href="#client_validation" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0o4r1z8" hitPolicy="FIRST">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>risk_validation</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0whrpob">
+        <inputExpression id="LiteralExpression_02y07is" typeRef="string">
+          <text>price_validation</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0pr4xgj">
+        <inputExpression id="LiteralExpression_0ckjohl" typeRef="string">
+          <text>client_validation</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="sl_decision" typeRef="string" biodi:width="192">
+        <outputValues id="UnaryTests_10qxwml">
+          <text>"approved","not apporved"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_0b7j6cj">
+        <inputEntry id="UnaryTests_0jj0971">
+          <text>"risky"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1124m3j">
+          <text>"expensive"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1yegp68">
+          <text>"nice guy"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05fkgo0">
+          <text>"approved"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0g7tyuu">
+        <inputEntry id="UnaryTests_1xxghuj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jxlzxa">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kvwab0">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1i4zpe5">
+          <text>"not apporved"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_13fpkch" name="client found" />
+  <inputData id="InputData_0f0rgty" name="client last name" />
+  <inputData id="InputData_033ev4z" name="client risk score" />
+  <inputData id="InputData_0ad3pc1" name="medication found" />
+  <inputData id="InputData_0s0zfun" name="medication pub price" />
+  <inputData id="InputData_1yo1ehw" name="medication medication risk drug abuse" />
+  <decision id="client_validation" name="Client validation">
+    <informationRequirement id="InformationRequirement_1cpvrlk">
+      <requiredInput href="#InputData_13fpkch" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_114as31">
+      <requiredInput href="#InputData_0f0rgty" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0n0vsgp">
+      <input id="InputClause_0pw3yiv">
+        <inputExpression id="LiteralExpression_1iwwbdk" typeRef="string">
+          <text>client_found</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0r26iuh">
+        <inputExpression id="LiteralExpression_033yhlc" typeRef="string">
+          <text>client_last_name</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0f2bcwk" name="client_validation" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="price_validation" name="price validation">
+    <informationRequirement id="InformationRequirement_09duqoe">
+      <requiredInput href="#InputData_0s0zfun" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0juhjjq">
+      <requiredInput href="#InputData_0ad3pc1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_16u73r8">
+      <input id="InputClause_05x1gen">
+        <inputExpression id="LiteralExpression_05x5jg6" typeRef="string">
+          <text>medication_found</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0ayam35">
+        <inputExpression id="LiteralExpression_09gd41c" typeRef="string">
+          <text>medication_pub_price</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_18vgjfp" name="price_validation" typeRef="string" />
+      <rule id="DecisionRule_09cj4l0">
+        <inputEntry id="UnaryTests_17ytfac">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0iu2c10">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ryem4b">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="risk_validation" name="Risk validation">
+    <informationRequirement id="InformationRequirement_14s45dv">
+      <requiredInput href="#InputData_1yo1ehw" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_16sgdsh">
+      <requiredInput href="#InputData_033ev4z" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1eajura">
+      <input id="InputClause_18zxkg5">
+        <inputExpression id="LiteralExpression_1qyijew" typeRef="string">
+          <text>client_risk_score</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1rj80sr">
+        <inputExpression id="LiteralExpression_15vdcfl" typeRef="string">
+          <text>medication_medication_risk_drug_abuse</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1d6j9b9" name="risk_validation" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_SL">
+        <dc:Bounds height="80" width="180" x="600" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1gfod0d" dmnElementRef="InputData_13fpkch">
+        <dc:Bounds height="45" width="125" x="267" y="407" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_15aaczk" dmnElementRef="InformationRequirement_1cpvrlk">
+        <di:waypoint x="330" y="407" />
+        <di:waypoint x="410" y="360" />
+        <di:waypoint x="410" y="340" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0h7bjyw" dmnElementRef="InputData_0f0rgty">
+        <dc:Bounds height="45" width="125" x="437" y="407" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_16jmfxk" dmnElementRef="InformationRequirement_114as31">
+        <di:waypoint x="500" y="407" />
+        <di:waypoint x="470" y="360" />
+        <di:waypoint x="470" y="340" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0zd2r40" dmnElementRef="InputData_033ev4z">
+        <dc:Bounds height="45" width="125" x="797" y="407" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0kd6jf5" dmnElementRef="InformationRequirement_16sgdsh">
+        <di:waypoint x="860" y="407" />
+        <di:waypoint x="910" y="370" />
+        <di:waypoint x="910" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1cj97cv" dmnElementRef="InputData_0ad3pc1">
+        <dc:Bounds height="45" width="125" x="697" y="487" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1rc2f2i" dmnElementRef="InformationRequirement_0juhjjq">
+        <di:waypoint x="760" y="487" />
+        <di:waypoint x="720" y="360" />
+        <di:waypoint x="720" y="340" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1p3l5il" dmnElementRef="InputData_0s0zfun">
+        <dc:Bounds height="45" width="125" x="557" y="487" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1qqjxun" dmnElementRef="InformationRequirement_09duqoe">
+        <di:waypoint x="620" y="487" />
+        <di:waypoint x="660" y="360" />
+        <di:waypoint x="660" y="340" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_10zj4ch" dmnElementRef="InputData_1yo1ehw">
+        <dc:Bounds height="45" width="125" x="967" y="407" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_04b57sp" dmnElementRef="InformationRequirement_14s45dv">
+        <di:waypoint x="1030" y="407" />
+        <di:waypoint x="970" y="370" />
+        <di:waypoint x="970" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0ohvfm4" dmnElementRef="InformationRequirement_1ew4l3e">
+        <di:waypoint x="690" y="260" />
+        <di:waypoint x="690" y="180" />
+        <di:waypoint x="690" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1rkl9pw" dmnElementRef="InformationRequirement_1rbw8c6">
+        <di:waypoint x="940" y="270" />
+        <di:waypoint x="735" y="180" />
+        <di:waypoint x="735" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0u9nbs3" dmnElementRef="InformationRequirement_1tg6x06">
+        <di:waypoint x="440" y="260" />
+        <di:waypoint x="645" y="180" />
+        <di:waypoint x="645" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0dbkyzt" dmnElementRef="client_validation">
+        <dc:Bounds height="80" width="180" x="350" y="260" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_09aactw" dmnElementRef="price_validation">
+        <dc:Bounds height="80" width="180" x="600" y="260" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1leomud" dmnElementRef="risk_validation">
+        <dc:Bounds height="80" width="180" x="850" y="270" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

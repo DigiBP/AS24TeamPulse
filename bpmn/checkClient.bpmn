@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1kkn7mk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.27.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1kkn7mk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.28.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
   <bpmn:process id="checkClient" isExecutable="true">
     <bpmn:serviceTask id="Activity_13wjw12" name="Check &#38; Get Client Information">
       <bpmn:extensionElements>
@@ -210,13 +210,28 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1focxzr</bpmn:incoming>
+      <bpmn:incoming>Flow_050boys</bpmn:incoming>
       <bpmn:outgoing>Flow_1v2as55</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1focxzr" sourceRef="Activity_14xeh8j" targetRef="Activity_0giy76k" />
+    <bpmn:sequenceFlow id="Flow_1focxzr" sourceRef="Activity_14xeh8j" targetRef="Activity_0gxutyq" />
     <bpmn:sequenceFlow id="Flow_1v2as55" sourceRef="Activity_0giy76k" targetRef="Event_1ezcoyn" />
     <bpmn:dataObjectReference id="DataObjectReference_1jemnm8" name="Andy Blabla" dataObjectRef="DataObject_1oyd0co" />
     <bpmn:dataObject id="DataObject_1oyd0co" />
+    <bpmn:businessRuleTask id="Activity_0gxutyq" name="Decision" camunda:resultVariable="sl_decision" camunda:decisionRef="Decision_SL" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_1focxzr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ja6qau</bpmn:outgoing>
+      <bpmn:property id="Property_04re2if" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_11icv80">
+        <bpmn:sourceRef>DataObjectReference_1jemnm8</bpmn:sourceRef>
+        <bpmn:targetRef>Property_04re2if</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_050boys" sourceRef="Activity_0o2j6n6" targetRef="Activity_0giy76k" />
+    <bpmn:sequenceFlow id="Flow_1ja6qau" sourceRef="Activity_0gxutyq" targetRef="Activity_0o2j6n6" />
+    <bpmn:userTask id="Activity_0o2j6n6" name="Display two" camunda:formRef="sl_assessment" camunda:formRefBinding="deployment">
+      <bpmn:incoming>Flow_1ja6qau</bpmn:incoming>
+      <bpmn:outgoing>Flow_050boys</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:message id="Message_17lo717" name="Message_17lo717" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -241,9 +256,6 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
           <dc:Bounds x="727" y="325" width="86" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1ezcoyn_di" bpmnElement="Event_1ezcoyn">
-        <dc:Bounds x="1452" y="272" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1t3pn6b" bpmnElement="Activity_14xeh8j">
         <dc:Bounds x="880" y="250" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -257,18 +269,28 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       <bpmndi:BPMNShape id="BPMNShape_05r5huj" bpmnElement="Activity_0is1qez">
         <dc:Bounds x="720" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_09lco1s" bpmnElement="Activity_0giy76k">
-        <dc:Bounds x="1270" y="250" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataObjectReference_1jemnm8_di" bpmnElement="DataObjectReference_1jemnm8">
-        <dc:Bounds x="1092" y="205" width="36" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1081" y="262" width="59" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_045kmkw_di" bpmnElement="Event_045kmkw">
         <dc:Bounds x="592" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1jemnm8_di" bpmnElement="DataObjectReference_1jemnm8">
+        <dc:Bounds x="1102" y="95" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1090" y="71" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mn6fp7_di" bpmnElement="Activity_0gxutyq">
+        <dc:Bounds x="1070" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ezcoyn_di" bpmnElement="Event_1ezcoyn">
+        <dc:Bounds x="1522" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_09lco1s" bpmnElement="Activity_0giy76k">
+        <dc:Bounds x="1390" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tikpmj_di" bpmnElement="Activity_0o2j6n6">
+        <dc:Bounds x="1240" y="250" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0cqrezm_di" bpmnElement="Flow_0cqrezm">
         <di:waypoint x="188" y="290" />
@@ -320,11 +342,23 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1focxzr_di" bpmnElement="Flow_1focxzr">
         <di:waypoint x="980" y="290" />
-        <di:waypoint x="1270" y="290" />
+        <di:waypoint x="1070" y="290" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1v2as55_di" bpmnElement="Flow_1v2as55">
-        <di:waypoint x="1370" y="290" />
-        <di:waypoint x="1452" y="290" />
+        <di:waypoint x="1490" y="290" />
+        <di:waypoint x="1522" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_050boys_di" bpmnElement="Flow_050boys">
+        <di:waypoint x="1340" y="290" />
+        <di:waypoint x="1390" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_11icv80_di" bpmnElement="DataInputAssociation_11icv80">
+        <di:waypoint x="1120" y="145" />
+        <di:waypoint x="1120" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ja6qau_di" bpmnElement="Flow_1ja6qau">
+        <di:waypoint x="1170" y="290" />
+        <di:waypoint x="1240" y="290" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
