@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "label": "Cient",
+      "label": "Client Found:",
       "type": "textfield",
       "layout": {
         "row": "Row_160dowl",
@@ -9,48 +9,52 @@
       },
       "id": "Field_1c4fy2k",
       "key": "client_found",
-      "readonly": false,
-      "disabled": true
+      "readonly": true,
+      "disabled": false
     },
     {
-      "label": "Last Name",
+      "label": "Client Last name:",
       "type": "textfield",
       "layout": {
         "row": "Row_160dowl",
         "columns": null
       },
       "id": "Field_1omntp6",
-      "key": "client_last_name"
+      "key": "client_last_name",
+      "readonly": true
     },
     {
-      "label": "Risk score",
+      "label": "Client Risk Score:",
       "type": "textfield",
       "layout": {
         "row": "Row_1jr8fzb",
         "columns": null
       },
       "id": "Field_1tmrzxb",
-      "key": "client_risk_score"
+      "key": "client_risk_score",
+      "readonly": true
     },
     {
-      "label": "Medication",
+      "label": "Medication Found:",
       "type": "textfield",
       "layout": {
         "row": "Row_1jr8fzb",
         "columns": null
       },
       "id": "Field_17vafxi",
-      "key": "medication_found"
+      "key": "medication_found",
+      "readonly": true
     },
     {
-      "label": "Medication price listed",
+      "label": "Medication Pub Price:",
       "type": "textfield",
       "layout": {
         "row": "Row_0t6x76z",
         "columns": null
       },
       "id": "Field_1c9n89b",
-      "key": "medication_pub_price"
+      "key": "medication_pub_price",
+      "readonly": true
     },
     {
       "label": "risk drug abuse",
@@ -60,10 +64,11 @@
         "columns": null
       },
       "id": "Field_0xpwo69",
-      "key": "medication_medication_risk_drug_abuse"
+      "key": "medication_medication_risk_drug_abuse",
+      "readonly": true
     },
     {
-      "label": "SL Decision",
+      "label": "Medication Risk Drug Abuse:",
       "type": "textfield",
       "layout": {
         "row": "Row_0feknvj",
@@ -71,7 +76,8 @@
       },
       "id": "Field_1iuhpun",
       "key": "sl_decision",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     }
   ],
   "type": "default",

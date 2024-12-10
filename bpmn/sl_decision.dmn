@@ -74,7 +74,7 @@
     <informationRequirement id="InformationRequirement_114as31">
       <requiredInput href="#InputData_0f0rgty" />
     </informationRequirement>
-    <decisionTable id="DecisionTable_0n0vsgp">
+    <decisionTable id="DecisionTable_0n0vsgp" hitPolicy="FIRST">
       <input id="InputClause_0pw3yiv">
         <inputExpression id="LiteralExpression_1iwwbdk" typeRef="string">
           <text>client_found</text>
@@ -86,6 +86,17 @@
         </inputExpression>
       </input>
       <output id="OutputClause_0f2bcwk" name="client_validation" typeRef="string" />
+      <rule id="DecisionRule_0z2disa">
+        <inputEntry id="UnaryTests_0nym08f">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c2jna7">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ro5aok">
+          <text>"risky"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <decision id="price_validation" name="price validation">
@@ -115,7 +126,7 @@
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0ryem4b">
-          <text></text>
+          <text>"expensive"</text>
         </outputEntry>
       </rule>
     </decisionTable>
@@ -127,7 +138,7 @@
     <informationRequirement id="InformationRequirement_16sgdsh">
       <requiredInput href="#InputData_033ev4z" />
     </informationRequirement>
-    <decisionTable id="DecisionTable_1eajura">
+    <decisionTable id="DecisionTable_1eajura" hitPolicy="FIRST">
       <input id="InputClause_18zxkg5">
         <inputExpression id="LiteralExpression_1qyijew" typeRef="string">
           <text>client_risk_score</text>
@@ -139,6 +150,17 @@
         </inputExpression>
       </input>
       <output id="OutputClause_1d6j9b9" name="risk_validation" typeRef="string" />
+      <rule id="DecisionRule_1h2jajx">
+        <inputEntry id="UnaryTests_0zw8x6x">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c3dyrv">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vryj9e">
+          <text>"nice guy"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
