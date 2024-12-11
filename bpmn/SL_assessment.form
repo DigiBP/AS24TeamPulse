@@ -1,0 +1,92 @@
+{
+  "components": [
+    {
+      "label": "Client Found:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_160dowl",
+        "columns": null
+      },
+      "id": "Field_1c4fy2k",
+      "key": "client_found",
+      "readonly": true,
+      "disabled": false
+    },
+    {
+      "label": "Client Last name:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_160dowl",
+        "columns": null
+      },
+      "id": "Field_1omntp6",
+      "key": "client_last_name",
+      "readonly": true
+    },
+    {
+      "label": "Client Risk Score:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1jr8fzb",
+        "columns": null
+      },
+      "id": "Field_1tmrzxb",
+      "key": "client_risk_score",
+      "readonly": true
+    },
+    {
+      "label": "Medication Found:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1jr8fzb",
+        "columns": null
+      },
+      "id": "Field_17vafxi",
+      "key": "medication_found",
+      "readonly": true
+    },
+    {
+      "label": "Medication Pub Price:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0t6x76z",
+        "columns": null
+      },
+      "id": "Field_1c9n89b",
+      "key": "medication_pub_price",
+      "readonly": true
+    },
+    {
+      "label": "risk drug abuse",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0t6x76z",
+        "columns": null
+      },
+      "id": "Field_0xpwo69",
+      "key": "medication_medication_risk_drug_abuse",
+      "readonly": true
+    },
+    {
+      "label": "Medication Risk Drug Abuse:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0feknvj",
+        "columns": null
+      },
+      "id": "Field_1iuhpun",
+      "key": "sl_decision",
+      "disabled": false,
+      "readonly": true
+    }
+  ],
+  "type": "default",
+  "id": "sl_assessment",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}
