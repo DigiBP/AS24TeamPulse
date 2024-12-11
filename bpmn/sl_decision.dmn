@@ -106,15 +106,18 @@
     <informationRequirement id="InformationRequirement_0juhjjq">
       <requiredInput href="#InputData_0ad3pc1" />
     </informationRequirement>
-    <decisionTable id="DecisionTable_16u73r8">
-      <input id="InputClause_05x1gen">
-        <inputExpression id="LiteralExpression_05x5jg6" typeRef="string">
-          <text>medication_found</text>
+    <informationRequirement id="InformationRequirement_0a3s6ao">
+      <requiredDecision href="#Decision_00m8mh2" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_16u73r8" hitPolicy="FIRST">
+      <input id="InputClause_05x1gen" label="Medication found">
+        <inputExpression id="LiteralExpression_05x5jg6" typeRef="long">
+          <text>number(medication_found)</text>
         </inputExpression>
       </input>
-      <input id="InputClause_0ayam35">
-        <inputExpression id="LiteralExpression_09gd41c" typeRef="string">
-          <text>medication_pub_price</text>
+      <input id="InputClause_0ayam35" label="Medication pub price">
+        <inputExpression id="LiteralExpression_09gd41c" typeRef="long">
+          <text>number(medication_pub_price)</text>
         </inputExpression>
       </input>
       <output id="OutputClause_18vgjfp" name="price_validation" typeRef="string" />
@@ -163,82 +166,96 @@
       </rule>
     </decisionTable>
   </decision>
+  <decision id="Decision_00m8mh2" name="price">
+    <variable id="InformationItem_02eaavj" />
+    <literalExpression id="LiteralExpression_0eie7ks">
+      <text>number(trim(string))</text>
+    </literalExpression>
+  </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="Decision_SL">
-        <dc:Bounds height="80" width="180" x="600" y="80" />
+        <dc:Bounds height="80" width="180" x="490" y="80" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1gfod0d" dmnElementRef="InputData_13fpkch">
-        <dc:Bounds height="45" width="125" x="267" y="407" />
+        <dc:Bounds height="45" width="125" x="157" y="407" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_15aaczk" dmnElementRef="InformationRequirement_1cpvrlk">
-        <di:waypoint x="330" y="407" />
-        <di:waypoint x="410" y="360" />
-        <di:waypoint x="410" y="340" />
+        <di:waypoint x="220" y="407" />
+        <di:waypoint x="300" y="360" />
+        <di:waypoint x="300" y="340" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_0h7bjyw" dmnElementRef="InputData_0f0rgty">
-        <dc:Bounds height="45" width="125" x="437" y="407" />
+        <dc:Bounds height="45" width="125" x="327" y="407" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_16jmfxk" dmnElementRef="InformationRequirement_114as31">
-        <di:waypoint x="500" y="407" />
-        <di:waypoint x="470" y="360" />
-        <di:waypoint x="470" y="340" />
+        <di:waypoint x="390" y="407" />
+        <di:waypoint x="360" y="360" />
+        <di:waypoint x="360" y="340" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_0zd2r40" dmnElementRef="InputData_033ev4z">
-        <dc:Bounds height="45" width="125" x="797" y="407" />
+        <dc:Bounds height="45" width="125" x="687" y="407" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_0kd6jf5" dmnElementRef="InformationRequirement_16sgdsh">
-        <di:waypoint x="860" y="407" />
-        <di:waypoint x="910" y="370" />
-        <di:waypoint x="910" y="350" />
+        <di:waypoint x="750" y="407" />
+        <di:waypoint x="800" y="370" />
+        <di:waypoint x="800" y="350" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_1cj97cv" dmnElementRef="InputData_0ad3pc1">
-        <dc:Bounds height="45" width="125" x="697" y="487" />
+        <dc:Bounds height="45" width="125" x="647" y="637" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_1rc2f2i" dmnElementRef="InformationRequirement_0juhjjq">
-        <di:waypoint x="760" y="487" />
-        <di:waypoint x="720" y="360" />
-        <di:waypoint x="720" y="340" />
+        <di:waypoint x="710" y="637" />
+        <di:waypoint x="625" y="360" />
+        <di:waypoint x="625" y="340" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_1p3l5il" dmnElementRef="InputData_0s0zfun">
-        <dc:Bounds height="45" width="125" x="557" y="487" />
+        <dc:Bounds height="45" width="125" x="247" y="607" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_1qqjxun" dmnElementRef="InformationRequirement_09duqoe">
-        <di:waypoint x="620" y="487" />
-        <di:waypoint x="660" y="360" />
-        <di:waypoint x="660" y="340" />
+        <di:waypoint x="310" y="607" />
+        <di:waypoint x="535" y="360" />
+        <di:waypoint x="535" y="340" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_10zj4ch" dmnElementRef="InputData_1yo1ehw">
-        <dc:Bounds height="45" width="125" x="967" y="407" />
+        <dc:Bounds height="45" width="125" x="857" y="407" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_04b57sp" dmnElementRef="InformationRequirement_14s45dv">
-        <di:waypoint x="1030" y="407" />
-        <di:waypoint x="970" y="370" />
-        <di:waypoint x="970" y="350" />
+        <di:waypoint x="920" y="407" />
+        <di:waypoint x="860" y="370" />
+        <di:waypoint x="860" y="350" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_0ohvfm4" dmnElementRef="InformationRequirement_1ew4l3e">
-        <di:waypoint x="690" y="260" />
-        <di:waypoint x="690" y="180" />
-        <di:waypoint x="690" y="160" />
+        <di:waypoint x="580" y="260" />
+        <di:waypoint x="580" y="180" />
+        <di:waypoint x="580" y="160" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_1rkl9pw" dmnElementRef="InformationRequirement_1rbw8c6">
-        <di:waypoint x="940" y="270" />
-        <di:waypoint x="735" y="180" />
-        <di:waypoint x="735" y="160" />
+        <di:waypoint x="830" y="270" />
+        <di:waypoint x="625" y="180" />
+        <di:waypoint x="625" y="160" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_0u9nbs3" dmnElementRef="InformationRequirement_1tg6x06">
-        <di:waypoint x="440" y="260" />
-        <di:waypoint x="645" y="180" />
-        <di:waypoint x="645" y="160" />
+        <di:waypoint x="330" y="260" />
+        <di:waypoint x="535" y="180" />
+        <di:waypoint x="535" y="160" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_0dbkyzt" dmnElementRef="client_validation">
-        <dc:Bounds height="80" width="180" x="350" y="260" />
+        <dc:Bounds height="80" width="180" x="240" y="260" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_09aactw" dmnElementRef="price_validation">
-        <dc:Bounds height="80" width="180" x="600" y="260" />
+        <dc:Bounds height="80" width="180" x="490" y="260" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1leomud" dmnElementRef="risk_validation">
-        <dc:Bounds height="80" width="180" x="850" y="270" />
+        <dc:Bounds height="80" width="180" x="740" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_06v8y5j" dmnElementRef="InformationRequirement_0a3s6ao">
+        <di:waypoint x="535" y="510" />
+        <di:waypoint x="580" y="360" />
+        <di:waypoint x="580" y="340" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0t9pp98" dmnElementRef="Decision_00m8mh2">
+        <dc:Bounds height="80" width="180" x="445" y="510" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
