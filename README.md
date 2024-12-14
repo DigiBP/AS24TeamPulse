@@ -1,7 +1,7 @@
 # AS24TeamPulse
 
 <figure>
-  <img src="images/logo_transparent.png" alt="logo">
+  <img src="images/logo.png" alt="logo">
 </figure>
 
 #### Preamble - *Project AS2024*
