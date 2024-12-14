@@ -1,0 +1,67 @@
+{
+  "components": [
+    {
+      "label": "Client Last name:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_160dowl",
+        "columns": null
+      },
+      "id": "Field_1omntp6",
+      "key": "client_last_name",
+      "readonly": true
+    },
+    {
+      "label": "Client Risk Score:",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1jr8fzb",
+        "columns": null
+      },
+      "id": "Field_1tmrzxb",
+      "key": "client_risk_score",
+      "readonly": true
+    },
+    {
+      "label": "risk drug abuse",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0feknvj",
+        "columns": null
+      },
+      "id": "Field_0xpwo69",
+      "key": "medication_medication_risk_drug_abuse",
+      "readonly": true
+    },
+    {
+      "label": "Validation",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_072zxts",
+        "columns": null
+      },
+      "id": "Field_0n4va84",
+      "key": "decision_sl",
+      "readonly": true
+    },
+    {
+      "text": "# Valid",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0yg0h79",
+        "columns": null
+      },
+      "id": "Field_1k0azfr"
+    }
+  ],
+  "type": "default",
+  "id": "sl_assessment_low",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}
