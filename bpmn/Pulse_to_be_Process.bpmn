@@ -8,6 +8,9 @@
     <bpmn:messageFlow id="Flow_0oov6ix" name="Receive invoice" sourceRef="Participant_0tsc98f" targetRef="start" />
     <bpmn:messageFlow id="Flow_0oms7ub" sourceRef="Activity_1hy65g9" targetRef="Participant_0tsc98f" />
     <bpmn:messageFlow id="Flow_153lv1z" sourceRef="Activity_0giy76k" targetRef="Participant_1vxkdmc" />
+    <bpmn:messageFlow id="Flow_061nm9u" sourceRef="Activity_0p5xmx7" targetRef="Participant_0tsc98f" />
+    <bpmn:messageFlow id="Flow_0j01tli" sourceRef="Activity_0is1qez" targetRef="Participant_0tsc98f" />
+    <bpmn:messageFlow id="Flow_191yqkv" sourceRef="Activity_00ezajj" targetRef="Participant_0tsc98f" />
   </bpmn:collaboration>
   <bpmn:process id="Pulse_to_be_Process" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1rfr16a">
@@ -21,15 +24,15 @@
         <bpmn:flowNodeRef>Activity_0p5xmx7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0is1qez</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_16jplcm</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_00ezajj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_05mvkbb</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0giy76k</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_03liegu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_07y40ee</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0tdb9ro</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1hy65g9</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0o2j6n6</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0gxutyq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_00ezajj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0giy76k</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1a5xmo1" name="Financial Controller">
         <bpmn:flowNodeRef>Gateway_128um60</bpmn:flowNodeRef>
@@ -232,66 +235,9 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
     <bpmn:sequenceFlow id="Flow_1p4pvai" name="Denied" sourceRef="Gateway_128um60" targetRef="Activity_00ezajj">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${review == false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="Activity_00ezajj" name="Send denial">
-      <bpmn:extensionElements>
-        <camunda:connector>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="url">https://61e41b51-86e6-4811-87a3-550bb6414c02.deepnoteproject.com/send_email</camunda:inputParameter>
-            <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify(
-{  
-    "invoice_id": invoice_id,
-    "reason": "invalid GTIN Check",
-}
-);</camunda:script>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="headers">
-              <camunda:map>
-                <camunda:entry key="Content-Type">application/json</camunda:entry>
-              </camunda:map>
-            </camunda:inputParameter>
-          </camunda:inputOutput>
-          <camunda:connectorId>http-connector</camunda:connectorId>
-        </camunda:connector>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1p4pvai</bpmn:incoming>
-      <bpmn:outgoing>Flow_0vuweb4</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:endEvent id="Event_05mvkbb" name="Reject invoice">
       <bpmn:incoming>Flow_0vuweb4</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:dataObjectReference id="DataObjectReference_1fqbudq" name="Invoice" dataObjectRef="DataObject_1fjwm1q" />
-    <bpmn:dataObject id="DataObject_1fjwm1q" />
-    <bpmn:serviceTask id="Activity_0giy76k" name="Send invoice to customer">
-      <bpmn:extensionElements>
-        <camunda:connector>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="url">https://61e41b51-86e6-4811-87a3-550bb6414c02.deepnoteproject.com/send_email</camunda:inputParameter>
-            <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify(
-{  
-    "invoice_id": invoice_id,
-    "reason": "Payment of Invoice",
-}
-);</camunda:script>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="headers">
-              <camunda:map>
-                <camunda:entry key="Content-Type">application/json</camunda:entry>
-              </camunda:map>
-            </camunda:inputParameter>
-          </camunda:inputOutput>
-          <camunda:connectorId>http-connector</camunda:connectorId>
-        </camunda:connector>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_04nz4kb</bpmn:incoming>
-      <bpmn:outgoing>Flow_02zldls</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0xg57ml">
-        <bpmn:targetRef>DataObjectReference_1fqbudq</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:serviceTask>
     <bpmn:endEvent id="Event_03liegu" name="Accept invoice">
       <bpmn:incoming>Flow_1ql7jfd</bpmn:incoming>
     </bpmn:endEvent>
@@ -361,6 +307,63 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       <bpmn:incoming>Flow_11cgaer</bpmn:incoming>
       <bpmn:outgoing>Flow_0zblnqa</bpmn:outgoing>
     </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="Activity_00ezajj" name="Send denial">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://61e41b51-86e6-4811-87a3-550bb6414c02.deepnoteproject.com/send_email</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify(
+{  
+    "invoice_id": invoice_id,
+    "reason": "invalid GTIN Check",
+}
+);</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1p4pvai</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vuweb4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0giy76k" name="Send invoice to customer">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://61e41b51-86e6-4811-87a3-550bb6414c02.deepnoteproject.com/send_email</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify(
+{  
+    "invoice_id": invoice_id,
+    "reason": "Payment of Invoice",
+}
+);</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_04nz4kb</bpmn:incoming>
+      <bpmn:outgoing>Flow_02zldls</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0xg57ml">
+        <bpmn:targetRef>DataObjectReference_1fqbudq</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:dataObjectReference id="DataObjectReference_1fqbudq" name="Invoice" dataObjectRef="DataObject_1fjwm1q" />
+    <bpmn:dataObject id="DataObject_1fjwm1q" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ufn8c4">
@@ -431,25 +434,11 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
           <dc:Bounds x="661" y="453" width="81" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_17emfxa" bpmnElement="Activity_00ezajj">
-        <dc:Bounds x="1624" y="690" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_05mvkbb_di" bpmnElement="Event_05mvkbb">
         <dc:Bounds x="1886" y="712" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1870" y="755" width="69" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataObjectReference_1fqbudq_di" bpmnElement="DataObjectReference_1fqbudq">
-        <dc:Bounds x="1658" y="600" width="36" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1658" y="657" width="36" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_09lco1s" bpmnElement="Activity_0giy76k">
-        <dc:Bounds x="1624" y="494" width="100" height="80" />
-        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1gp21j9" bpmnElement="Event_03liegu">
         <dc:Bounds x="1886" y="382" width="36" height="36" />
@@ -484,6 +473,20 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       <bpmndi:BPMNShape id="Activity_1mn6fp7_di" bpmnElement="Activity_0gxutyq">
         <dc:Bounds x="983" y="570" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_17emfxa" bpmnElement="Activity_00ezajj">
+        <dc:Bounds x="1700" y="690" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_09lco1s" bpmnElement="Activity_0giy76k">
+        <dc:Bounds x="1590" y="494" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1fqbudq_di" bpmnElement="DataObjectReference_1fqbudq">
+        <dc:Bounds x="1622" y="600" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1622" y="657" width="36" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0cqrezm_di" bpmnElement="Flow_0cqrezm">
         <di:waypoint x="278" y="610" />
@@ -561,7 +564,7 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_04nz4kb_di" bpmnElement="Flow_04nz4kb">
         <di:waypoint x="1493" y="534" />
-        <di:waypoint x="1624" y="534" />
+        <di:waypoint x="1590" y="534" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1s1dsjw_di" bpmnElement="Flow_1s1dsjw">
         <di:waypoint x="1518" y="400" />
@@ -573,18 +576,18 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1p4pvai_di" bpmnElement="Flow_1p4pvai">
         <di:waypoint x="1493" y="861" />
-        <di:waypoint x="1674" y="861" />
-        <di:waypoint x="1674" y="770" />
+        <di:waypoint x="1750" y="861" />
+        <di:waypoint x="1750" y="770" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1630" y="803" width="36" height="14" />
+          <dc:Bounds x="1706" y="803" width="36" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0vuweb4_di" bpmnElement="Flow_0vuweb4">
-        <di:waypoint x="1724" y="730" />
+        <di:waypoint x="1800" y="730" />
         <di:waypoint x="1886" y="730" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_02zldls_di" bpmnElement="Flow_02zldls">
-        <di:waypoint x="1724" y="534" />
+        <di:waypoint x="1690" y="534" />
         <di:waypoint x="1804" y="534" />
         <di:waypoint x="1804" y="425" />
       </bpmndi:BPMNEdge>
@@ -631,12 +634,24 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
         <di:waypoint x="1468" y="249" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_153lv1z_di" bpmnElement="Flow_153lv1z">
-        <di:waypoint x="1674" y="494" />
-        <di:waypoint x="1674" y="139" />
+        <di:waypoint x="1640" y="494" />
+        <di:waypoint x="1640" y="139" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0xg57ml_di" bpmnElement="DataOutputAssociation_0xg57ml">
-        <di:waypoint x="1674" y="574" />
-        <di:waypoint x="1674" y="600" />
+        <di:waypoint x="1639" y="574" />
+        <di:waypoint x="1638" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_061nm9u_di" bpmnElement="Flow_061nm9u">
+        <di:waypoint x="550" y="430" />
+        <di:waypoint x="550" y="249" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j01tli_di" bpmnElement="Flow_0j01tli">
+        <di:waypoint x="860" y="430" />
+        <di:waypoint x="860" y="249" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_191yqkv_di" bpmnElement="Flow_191yqkv">
+        <di:waypoint x="1750" y="690" />
+        <di:waypoint x="1750" y="249" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
