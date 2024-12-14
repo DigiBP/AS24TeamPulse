@@ -46,25 +46,14 @@
       "readonly": true
     },
     {
-      "label": "Validation",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_072zxts",
-        "columns": null
-      },
-      "id": "Field_0n4va84",
-      "key": "decision_sl",
-      "readonly": true
-    },
-    {
       "values": [
         {
           "label": "Accept",
-          "value": "Accept"
+          "value": "true"
         },
         {
           "label": "Decline",
-          "value": "Decline"
+          "value": "false"
         }
       ],
       "label": "review",
