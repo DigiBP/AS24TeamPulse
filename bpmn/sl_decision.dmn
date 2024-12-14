@@ -10,6 +10,9 @@
     <informationRequirement id="InformationRequirement_1tg6x06">
       <requiredDecision href="#client_validation" />
     </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_12omhqw">
+      <requiredKnowledge href="#BusinessKnowledgeModel_1elmykr" />
+    </knowledgeRequirement>
     <decisionTable id="DecisionTable_0o4r1z8" hitPolicy="FIRST">
       <input id="Input_1" biodi:width="192">
         <inputExpression id="InputExpression_1" typeRef="boolean">
@@ -133,7 +136,7 @@
       </rule>
     </decisionTable>
   </decision>
-  <decision id="price_validation" name="price validation">
+  <decision id="price_validation" name="Price validation">
     <informationRequirement id="InformationRequirement_09duqoe">
       <requiredInput href="#InputData_0s0zfun" />
     </informationRequirement>
@@ -277,6 +280,7 @@
       </rule>
     </decisionTable>
   </decision>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_1elmykr" name="Spätzialitätenliste (SL)" />
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="Decision_SL">
@@ -346,6 +350,13 @@
       <dmndi:DMNShape id="DMNShape_1leomud" dmnElementRef="risk_validation">
         <dc:Bounds height="80" width="180" x="660" y="270" />
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_04ujlox" dmnElementRef="BusinessKnowledgeModel_1elmykr">
+        <dc:Bounds height="46" width="135" x="123" y="97" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1fdhwz9" dmnElementRef="KnowledgeRequirement_12omhqw">
+        <di:waypoint x="258" y="120" />
+        <di:waypoint x="410" y="120" />
+      </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </definitions>
