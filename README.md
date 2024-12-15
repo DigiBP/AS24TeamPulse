@@ -72,7 +72,7 @@ The best-case scenario is the approval of the invoice, which terminates the proc
 
 <figure>
   <img src="images/Pulse_as_is_Process_final.png" alt="As-Is process diagram">
-  <figcaption>Figure 1: As-Is BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
+  <figcaption>As-Is BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
 </figure>
 
 As described in this workflow, there are many tasks for the Assistant, which could be automated and more efficient.
@@ -136,9 +136,9 @@ Acceptance Criteria:
 In this chapter the new innovations in automizing the business processes are described. The goal is to reduce cost and save time in the approval process of our Swiss healthcare insurance company. Providing insights of the workflow and automating of tasks. Additionally serving as a guideance for reproducability. 
 
 
-<figure>
+<figure id="As-Is">
   <img src="images/Pulse_to_be_Process.png" alt="As-Is process diagram">
-  <figcaption>Figure 1: To-BE BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
+  <figcaption>To-BE BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
 </figure>
 
 
@@ -156,48 +156,37 @@ Key functionalities:
 
 
 ## Automated workflow
-A new email to the address digibp.pulse.team@gmail.com inicializes the process. In make.com the .pdf attachment of the email is parsed and the content forwarded to the Flask API on Deepnote. In Deepnote the invoice is inserted to the invoice table. This API triggers also the starting event of the Camunda workflow.
+A new email to the address digibp.pulse.team@gmail.com inicializes the process. In "make" the .pdf attachment of the email is parsed and the content forwarded to the Flask API on Deepnote. In Deepnote the invoice is inserted to the invoice table. This API triggers also the starting event of the Camunda workflow.
 
 The first activity checks if the patient is a client of our healthcare insurance. Secondly the medication is compared with a subset of the Swiss Spezialitätenliste. This returns the reference price of the medication. If the GTIN is invalid, or the patient is no client, it will sent a rejection message to the healthcare provider. 
 
-After the first checks, a risk calculation is executed based on the price difference of the Spezialitätenliste compared to the invoice. Additionally there the patient has a risk-score which is relevant for drug abuse comparing the risk of the patient and if the drug is addictive.
+After the first checks, a risk calculation is executed based on the price difference of the "Spezialitätenliste" compared to the invoice. Additionally there the patient has a risk-score which is relevant for drug abuse comparing the risk of the patient and if the drug is addictive.
 
 If the risk is low, the assistant checks the invoice and if the risk is high, the financial controller checks the invoice. The controller can approve or reject the invoice. Based on the decision the e-mail will be sent to the healthcare provider and the client. All the messages are written by an LLM giving it the nessesary informations what to write. 
 
 
-## Starting Process
-In [Figure 2](#figure-2) the automated workflow in make.com is visualized, including the modules. The process starts with the Gmail module monitoring incoming emails, receive them and the workflow iterates through its attachments, using a filter, which only let files with the endings '.pdf' pass the workflow.
+## Receiving E-Mail
+In the <a href="#makeReceive"> image </a> below, the automated workflow in make is visualized, including the modules. The process starts with the Gmail module monitoring incoming emails, receive them and the workflow iterates through its attachments, using a filter, which only let files with the endings '.pdf' pass the workflow.
 The PDF Files are routed to two actions, first uploaded directly to the digitbp.pulse.team@gmail.com Google Drive storage, and the other path sends the PDF file to the PDF.co module. This module converts the information in the PDF file to a JSON format, which is then passed to the JSON module to make an JSON object out of these information, which is suitable for being sent to an API using the HTTP post request module.
 
-and upload to google drive.
-
-<figure>
+<figure id = "makeReceive">
   <img src="images/make.png" alt="make pipline">
-  <figcaption>Figure 2: MAKE workflow pipline</figcaption>
+  <figcaption>make workflow pipline</figcaption>
 </figure>
 
-
-
+## Forward to Deepnote
+The make pipeline forwards the JSON object with a http request to Deepnote.
 The API extract the information from the JSON object and creates an entry in the Invoice table. The extracted values from the JSON object are then send to the Camunda endpoint, which starts the camunda process. 
 
-
-
-<figure>
+<!-- <figure>
   <img src="images/placeholder_camunda.png" alt="Camunda">
-  <figcaption>Figure 3: PLACEHOLDER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </figcaption>
-</figure>
+  <figcaption> Figure 3: PLACEHOLDER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </figcaption>
+</figure> -->
 
-The BPMN process in [Figure 3](#figure-3) describes a making process for medication cost approval or denial. After receiving the information of the invoice from the API as JSON objects, the system checks if the client is a client from our healthcare insurance. If not, the client gets an denial generated by an Large language model. If the client is in our database, the information about the medication is fetched from the Medication table and checks if the medication exists. Also here a denial is generated with an LLM if this doesn't exist and if yes the process proceed to display the information. 
+The BPMN process in <a href="#??"> Figure 3 </a> describes a making process for medication cost approval or denial. After receiving the information of the invoice from the API as JSON objects, the system checks if the client is a client from our healthcare insurance. If not, the client gets an denial generated by an Large language model. If the client is in our database, the information about the medication is fetched from the Medication table and checks if the medication exists. Also here a denial is generated with an LLM if this doesn't exist and if yes the process proceed to display the information. 
 
 OVERVIEW THIS:.........................
 For calculating the risk-benefit of the cost approval for the medication, and if the invoice is reasonable, the information undergoes an [Decision Table](#decision-table) to automate this task. If there is an high risk, the task is going to proceed to an higher authority, which checks the case manually and decide if the cost is approved or denied, with an LLM generated letter to the client. If the higher authority finds the invoice for reasonable or the decision is a low risk, the system sends a positive response generated by the LLM before ending.
-
-![sendMail](https://hackmd.io/_uploads/HyCkSGo4ye.png)
-
-
-### Interface from deepnote to make.com
-
-
 
 ## Flask API for external service tasks
 
@@ -218,15 +207,13 @@ For calculating the risk-benefit of the cost approval for the medication, and if
     </tr>
 </table>
 
-
-
 ## Database
 
 For this project, the medical billing and insurance management system, designed specifically for the Swiss healthcare environment, is represented in three tables, which are depicted in [Figure 4](#figure-4). The first table on the left describes the Medication table, which stores details about medications, including a unique identifier (GTIN), manufacturer, description, substances, public price, and a drug abuse risk indicator. Using the GTIN number, the Invoice table in the middle links to the Medication table. This table records invoice data, such as a unique invoice ID, an insurance number, a medication identifier, the date, the biller’s email, and the total amount. The Clients table on the right is linked to the Invoice table via the insurance number and holds information about the client, including first and last names, address details, email, and a risk score. 
 
-<figure>
+<figure id = "databases">
   <img src="images/databases.png" alt="Screenshot of generated databases">
-  <figcaption>Figure 4: SQLite healthcare database for patient records, invoicing, and medication tracking.</figcaption>
+  <figcaption>SQLite healthcare database for patient records, invoicing, and medication tracking.</figcaption>
 </figure>
 
 ## Decision Table
@@ -250,14 +237,13 @@ The service follows Switzerland's Spezialitätenliste (SL) rules for medication 
 
 #### Example of a high risk decision
 
-<figure>
+<figure id = "highRiskDecision">
   <img src="images/high_risk_decision.png" alt="decision of high risk on client">
-  <figcaption>Figure 5: Decision on high risk client.</figcaption>
+  <figcaption>Decision on high risk client.</figcaption>
 </figure>
 
 
 ## LLM Generated Letters
-
 For generating letters sent for cost approval or denial, a Large Language Model (LLM), specifically Zephyr 7B β by HuggingfaceH4, was trained (see [Deepnote.com](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)).
 If the process decides to approve the costs of the medication invoice, the LLM will generate an approval letter and send it via an API to Make.com, which automatically sends the letter to the client's email address using the Webhooks and Email modules.
 
@@ -268,14 +254,13 @@ Cost approval may be denied in the following cases:
 
 In each of the above cases, an individual denial letter will be generated using the LLM, clearly stating the reason for denial. After the letter is generated as a PDF, it will be sent to an API, which forwards it to Make using the Webhooks module. The Email module will then automatically send the denial letter to the client's email address (see [Figure 5](#figure-5)).
 
-<figure>
-  <img src="images/send_email.png" alt="Send email to client">
-  <figcaption>Figure 5: Send email to client</figcaption>
+<figure id = "makeSend">
+  <img src="images/sendMail.png" alt="Send email to client">
+  <figcaption>Send email to client</figcaption>
 </figure>
 
 
 ## Limitations
-
 The email **must** be completely empty and have the same format as the Swiss Tarmed invoices (use provided templates). 
 Due to time issues the project is limited to medication that have the Tarif 402 (GTIN code), even though tarif positions in the Tarmed system are not specifecly defined. 
 The module PDF.co in [Make](https://www.make.com/en) provides only limited tokens and expires on the 5th January 2025, and limited tokens (should be enough until it expires).
@@ -283,11 +268,9 @@ The Gmail module in [Make](https://www.make.com/en) expires on the 5th June 2025
 
 
 ## Conclusion
-
 In the project automated the medication invoice processing workflow for a fictional Swiss healthcare insurance company. By implementing automated email processing, PDF parsing, risk assessment, and LLM-generated decision letters, we significantly reduced manual workload for administrative staff while accelerating response times for clients. The integration of multiple technologies (Make, Camunda, Flask API) created a end-to-end automated solution.
 
 ## Tools used:
-
 - [Make](https://www.make.com/en)
 - Camunda
 - [Deepnote (Python 3.9)](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Database-Creation-and-Population-888ec597bf47454587ad51d22219648e?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)
@@ -321,3 +304,17 @@ https://www.bag.admin.ch/bag/en/home/versicherungen/krankenversicherung/krankenv
 
 claude und chatgpt und deepl? 
 und vlt no AI Tool im make.com? 
+
+
+
+<style>
+    /* initialise the counter */
+    body { counter-reset: figureCounter; }
+    /* increment the counter for every instance of a figure even if it doesn't have a caption */
+    figure { counter-increment: figureCounter; }
+    /* prepend the counter to the figcaption content */
+    figure figcaption:before {
+        content: "Figure " counter(figureCounter) ": "
+    }
+</style>
+
