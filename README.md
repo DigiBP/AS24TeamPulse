@@ -1,6 +1,6 @@
 # AS24TeamPulse
 
-<figure>
+<figure id = logo>
   <img src="images/logo.png" alt="logo">
 </figure>
 
@@ -70,7 +70,7 @@ For valid medications, the process proceeds to the risk calculation stage **(MAY
 
 The best-case scenario is the approval of the invoice, which terminates the process after notifying the healthcare provider and sending the notification and invoice to the customer.
 
-<figure>
+<figure id = asIs>
   <img src="images/Pulse_as_is_Process_final.png" alt="As-Is process diagram">
   <figcaption>As-Is BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
 </figure>
@@ -87,7 +87,7 @@ The goal of this project is to make a faster and automized process of payment de
 The main stakeholders is our insurance, particularly the administrative assistant, which gets a lot of support with the execution of repetitive, boring standard tasks. In addition the client benefits from a very fast process cycle, which he gets the feedback of the calculations and decisions. Lastly the doctor gets a really fast feedback, if there is a error in the invoice, with the description of the error.
 
 
-## User Stories/ Scenario/ case
+## User Stories / Scenario / case
 
 ### Assistant
 
@@ -133,11 +133,11 @@ Acceptance Criteria:
 
 # TO-BE Process
 
-In this chapter the new innovations in automizing the business processes are described. The goal is to reduce cost and save time in the approval process of our Swiss healthcare insurance company. Providing insights of the workflow and automating of tasks. Additionally serving as a guideance for reproducability. 
+In this chapter the new innovations in automizing the business processes are described. The goal is to reduce cost and save time in the approval process of our Swiss healthcare insurance company pulse. Providing insights of the workflow and automating of tasks. Additionally serving as a guideance for reproducability. 
 
 
-<figure id="As-Is">
-  <img src="images/Pulse_to_be_Process.png" alt="As-Is process diagram">
+<figure id= ToBe>
+  <img src="images/Pulse_to_be_Process.png" alt="To-Be process diagram">
   <figcaption>To-BE BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
 </figure>
 
@@ -154,7 +154,6 @@ Key functionalities:
 - Generates and sends decision letters back to client
 
 
-
 ## Automated workflow
 A new email to the address digibp.pulse.team@gmail.com inicializes the process. In "make" the .pdf attachment of the email is parsed and the content forwarded to the Flask API on Deepnote. In Deepnote the invoice is inserted to the invoice table. This API triggers also the starting event of the Camunda workflow.
 
@@ -164,9 +163,8 @@ After the first checks, a risk calculation is executed based on the price differ
 
 If the risk is low, the assistant checks the invoice and if the risk is high, the financial controller checks the invoice. The controller can approve or reject the invoice. Based on the decision the e-mail will be sent to the healthcare provider and the client. All the messages are written by an LLM giving it the nessesary informations what to write. 
 
-
 ## Receiving E-Mail
-In the <a href="#makeReceive"> image </a> below, the automated workflow in make is visualized, including the modules. The process starts with the Gmail module monitoring incoming emails, receive them and the workflow iterates through its attachments, using a filter, which only let files with the endings '.pdf' pass the workflow.
+In the [image](#makeReceive) below, the automated workflow in make is visualized, including the modules. The process starts with the Gmail module monitoring incoming emails, receive them and the workflow iterates through its attachments, using a filter, which only let files with the endings '.pdf' pass the workflow.
 The PDF Files are routed to two actions, first uploaded directly to the digitbp.pulse.team@gmail.com Google Drive storage, and the other path sends the PDF file to the PDF.co module. This module converts the information in the PDF file to a JSON format, which is then passed to the JSON module to make an JSON object out of these information, which is suitable for being sent to an API using the HTTP post request module.
 
 <figure id = "makeReceive">
@@ -176,21 +174,31 @@ The PDF Files are routed to two actions, first uploaded directly to the digitbp.
 
 ## Forward to Deepnote
 The make pipeline forwards the JSON object with a http request to Deepnote.
-The API extract the information from the JSON object and creates an entry in the Invoice table. The extracted values from the JSON object are then send to the Camunda endpoint, which starts the camunda process. 
+The API extract the information from the JSON object and creates an entry in the Invoice table. The extracted values from the JSON object are then send to the Camunda endpoint, which eventually starts the camunda [To be](#ToBe) process. 
 
 <!-- <figure>
   <img src="images/placeholder_camunda.png" alt="Camunda">
   <figcaption> Figure 3: PLACEHOLDER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </figcaption>
 </figure> -->
 
-The BPMN process in <a href="#??"> Figure 3 </a> describes a making process for medication cost approval or denial. After receiving the information of the invoice from the API as JSON objects, the system checks if the client is a client from our healthcare insurance. If not, the client gets an denial generated by an Large language model. If the client is in our database, the information about the medication is fetched from the Medication table and checks if the medication exists. Also here a denial is generated with an LLM if this doesn't exist and if yes the process proceed to display the information. 
+## Camunda BPMN To Be Workflow
+...!
+The BPMN process in the [image](#ToBe) above describes a process for medication cost approval or denial.
+After receiving the information of the invoice from the API as JSON objects, the system checks if the patient is a client from our healthcare insurance. 
+If the patient is in our database, the information about the medication is fetched from the Medication table and checks if the medication exists.
+When one check fails, a denial message is generated with an LLM giving the healthcare provider a overview, why the invoice cannot be proceed. 
+
+## Camunda CMN Risk evaluation
+Furthermore there is a risk evaluation in where the invoice gets reviewed. 
 
 OVERVIEW THIS:.........................
 For calculating the risk-benefit of the cost approval for the medication, and if the invoice is reasonable, the information undergoes an [Decision Table](#decision-table) to automate this task. If there is an high risk, the task is going to proceed to an higher authority, which checks the case manually and decide if the cost is approved or denied, with an LLM generated letter to the client. If the higher authority finds the invoice for reasonable or the decision is a low risk, the system sends a positive response generated by the LLM before ending.
 
+**Add some Image**
+
 ## Flask API for external service tasks
 
-<table width="900">
+<table width="900", id = endpoints>
     <tr>
         <th width="250"><b>Endpoint</b></th>
         <th width="70"><b>Method</b></th>
@@ -219,7 +227,6 @@ For this project, the medical billing and insurance management system, designed 
 ## Decision Table
 
 ### SL Decision Service
-
 DMN-based decision service for medication validation that evaluates:
 
 - Client eligibility and risk profile
@@ -229,7 +236,6 @@ DMN-based decision service for medication validation that evaluates:
 The service follows Switzerland's Spezialitätenliste (SL) rules for medication reimbursement approval.
 
 #### Decision Flow
-
 1. Validates client exists in system
 2. Checks medication price against published rates based on SL
 3. Evaluates risk based on client profile and medication abuse potential
@@ -252,7 +258,7 @@ Cost approval may be denied in the following cases:
 - The medication does not exist in our database.
 - After a high-risk detection, a higher authority decides that the cost approval is not reasonable.
 
-In each of the above cases, an individual denial letter will be generated using the LLM, clearly stating the reason for denial. After the letter is generated as a PDF, it will be sent to an API, which forwards it to Make using the Webhooks module. The Email module will then automatically send the denial letter to the client's email address (see [Figure 5](#figure-5)).
+In each of the above cases, an individual denial letter will be generated using the LLM, clearly stating the reason for denial. After the letter is generated as a PDF, it will be sent to an API, which forwards it to Make using the Webhooks module. The Email module will then automatically send the denial letter to the client's email address (see [Figure below](#makeSend)).
 
 <figure id = "makeSend">
   <img src="images/sendMail.png" alt="Send email to client">
@@ -272,17 +278,16 @@ In the project automated the medication invoice processing workflow for a fictio
 
 ## Tools used:
 - [Make](https://www.make.com/en)
-- Camunda
+- Camunda 7
 - [Deepnote (Python 3.9)](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Database-Creation-and-Population-888ec597bf47454587ad51d22219648e?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)
 - Google Mail
 - [Google Drive](https://drive.google.com/drive/folders/1zbCjgil0v--oFb20nrZZ77zMGt39m_4o?usp=sharing)
 - Google Cloud Platform: Projectnr. 49695570445 
-  (log in with the provided email in the [chapter Setup Instructions](#setup))
+  (log in with the provided email in the [chapter Setup Instructions](#Setup-Instructions))
 - [Flask (for API/ Webhooks integration)](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)
 - [SQLite database](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Database-Creation-and-Population-888ec597bf47454587ad51d22219648e?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)
 - PDF.co
-- Webhooks
-- Zephyr 7B β
+- LLM: [Zephyr 7B β](https://huggingface.co/HuggingFaceH4/zephyr-7b-beta)
 
 ## Setup Instructions
 
