@@ -333,7 +333,7 @@ The project automated the medication invoice processing workflow for a Swiss hea
 - [Google Drive](https://drive.google.com/drive/folders/1zbCjgil0v--oFb20nrZZ77zMGt39m_4o?usp=sharing)
 - Google Cloud Platform: Projectnr. 49695570445 
   (log in with the provided email in the [chapter Setup Instructions](#Setup-Instructions))
-- [Flask](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02) as a API
+- [Flask](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02) library
 - [SQLite database](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Database-Creation-and-Population-888ec597bf47454587ad51d22219648e?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)
 - PDF.co
 - Webhook
@@ -343,15 +343,15 @@ The project automated the medication invoice processing workflow for a Swiss hea
 Step-by-step guide to run the workflow in Camunda:
 
 Good case scenario: 
-1. First check if the make.com scenarios are running (1. Integration Gmail, 2. Send e-Mail)
+1. First check if the [make.com](https://eu2.make.com/1034263/scenarios?folder=all&tab=all) scenarios are running (1. Integration Gmail, 2. Send e-Mail)
 1. Check if the [deepnote.com](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02) is running
-1. check if Camunda workflow engine is running
+1. check if [Camunda workflow](https://digibp.engine.martinlab.science/camunda/app/tasklist/default/) engine is running
 1. Sending a empty e-mail with invoice PDF attachment to the address: digitbp.pulse.team@gmail.com (in the format of Swiss invoices Tarmed - example invoices are provid on the [google drive](https://drive.google.com/drive/folders/1zbCjgil0v--oFb20nrZZ77zMGt39m_4o) on the digitbp.pulse.team@gmail.com account )
 1. Go to the [tasklist](https://digibp.engine.martinlab.science/camunda/app/tasklist/default/#/?searchQuery=%5B%5D&filter=f0945b62-643a-11ef-8ae6-fa163ee583d0&sorting=%5B%7B%22sortBy%22:%22created%22,%22sortOrder%22:%22desc%22%7D%5D&task=77cab653-ba23-11ef-b75f-fa163ee583d0&detailsTab=task-detail-form&viewbox=%7B%22Definitions_1kkn7mk%22:%7B%22x%22:153.80327868852459,%22y%22:-815.3469945355191,%22width%22:1819.672131147541,%22height%22:2628.415300546448%7D%7D) in Camunda
 1. Based on the risk evaluation the assistant or the finance controller can approve the invoice.
 1. after approving the invoice two emails are generated
-1. one for the client and one for the healthcare provider - the emails which are used are in the database and the one in the invoice from the healthcare provider
-1. after this the process ends
+1. one for the client and one for the healthcare provider - the emails which are used are in the database and the one in the invoice of the healthcare provider
+1. when the email is sent, the process ends.
 
 Bad-case scenario: 
 1. repeat the first four steps of the good case scenario but with a error in the invoice
@@ -362,8 +362,6 @@ Bad-case scenario:
 For this project the following email address was created and used as our healthcare insurance mail: digitbp.pulse.team@gmail.com 
 The password is provided in [Moodle](https://moodle.fhnw.ch/mod/assign/view.php?id=2442058).
 As a second address to send / receive mails: digibp.pulse.peer@gmail.com with the same password
-
-
 
 ## Knowledge Base 
 https://www.gs1.ch/en/industries/healthcare/pharmaceuticals
