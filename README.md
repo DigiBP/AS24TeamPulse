@@ -34,6 +34,9 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
 |Devid Montecchiari |devid.montecchiari@fhnw.ch|{#supervisors}
 
 
+https://github.com/user-attachments/assets/82d9deff-23c5-4ab1-8135-bede661d7e56
+
+
 ## Table of contents
 - [Project Description 👑](#project-description-)
 - [AS-IS Process 🚩](#as-is-process-)
