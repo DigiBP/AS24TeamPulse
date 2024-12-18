@@ -8,7 +8,7 @@ This project aims to explore and implement innovative solutions to streamline he
   <img src="images/logo.png" alt="logo">
 </figure>
 
-
+https://github.com/user-attachments/assets/82d9deff-23c5-4ab1-8135-bede661d7e56
  
 ## Authors 👨‍👨👱🏻‍♀️👩
 
@@ -21,8 +21,6 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
 |Joëlle Höchle|joelle.hoechle@students.fhnw.ch|
 |Nicolas Bopp|nicolas.bopp@students.fhnw.ch|{#authores}
 
-
-
 ## Supervisors 👩‍💼
 
 [Table 2](#supervisors) shows the names of the supervisors who provided guidance and expertise in the context of healthcare digitalization throughout the project.
@@ -32,9 +30,6 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
 |Andreas Martin| andreas.martin@fhnw.ch|
 |Charuta Pande |charuta.pande@fhnw.ch|
 |Devid Montecchiari |devid.montecchiari@fhnw.ch|{#supervisors}
-
-
-https://github.com/user-attachments/assets/82d9deff-23c5-4ab1-8135-bede661d7e56
 
 
 ## Table of contents
