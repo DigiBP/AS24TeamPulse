@@ -198,7 +198,7 @@ The PDF files are routed to two actions, firstly uploading them directly to the 
 
 <figure id = "makeReceive">
   <img src="images/make.png" alt="make pipeline">
-  <figcaption>Figure 2: MAKE workflow pipeline</figcaption>
+  <figcaption>Figure 2: MAKE workflow pipeline.</figcaption>
 </figure>
 
 
@@ -323,7 +323,7 @@ There is also a risk assessment where the invoice is reviewed. To calculate the 
 
 <figure id = "CMNiskevaluation">
   <img src="images/riskevaluation.png" alt="Riskevaluation CMN">
-  <figcaption>Figure 5: CMN risk evaluation</figcaption>
+  <figcaption>Figure 5: CMN risk evaluation.</figcaption>
 </figure>
 
 #### SL Decision Service 🤵
@@ -364,7 +364,7 @@ In each of the above cases, a letter of individual denial will be generated usin
 
 <figure id = "makeSend">
   <img src="images/sendMail.png" alt="Send email to client">
-  <figcaption>Figure 7: Send email to client  in make.com</figcaption>
+  <figcaption>Figure 7: Send email to client  in make.com.</figcaption>
 </figure>
 
 
