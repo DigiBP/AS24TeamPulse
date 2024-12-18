@@ -308,7 +308,7 @@ If any of the checks fail, a rejection message is generated with an LLM giving t
 
 
 <figure id= "ToBe">
-  <img src="images/Pulse_to_be_Process.png" alt="To-Be process diagram">
+  <img src="images/Pulse_tobe_Process.png" alt="To-Be process diagram">
   <figcaption>Figure 4: To-Be BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
 </figure>
 
