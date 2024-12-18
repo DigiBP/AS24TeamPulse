@@ -35,15 +35,7 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
 
 
 ## Table of contents
-   * [Authors 👨‍👨👱🏻‍♀️👩](#authors-)
-   * [Supervisors 👩‍💼](#supervisors-)
-   * [Project Description 👑](#project-description-)
-- [📄💊 AS24TeamPulse 💊📄](#-as24teampulse-)
-      - [Preamble — *Project AS2024*](#preamble--project-as2024)
-  - [Authors 👨‍👨👱🏻‍♀️👩](#authors-️)
-  - [Supervisors 👩‍💼](#supervisors-)
-  - [Table of contents](#table-of-contents)
-  - [Project Description 👑](#project-description-)
+- [Project Description 👑](#project-description-)
 - [AS-IS Process 🚩](#as-is-process-)
   - [Roles 🎭](#roles-)
   - [Workflow ⚡︎](#workflow-︎)
@@ -70,8 +62,8 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
   - [Tools used 🔨](#tools-used-)
   - [Run the workflow ⚙️](#run-the-workflow-️)
   - [Further details 📖](#further-details-)
-  - [Knowledge Base 📚](#knowledge-base-)
-    - [Usage of AI 🤖](#usage-of-ai-)
+- [Knowledge Base 📚](#knowledge-base-)
+- [Usage of AI 🤖](#usage-of-ai-)
 
 
 ## Project Description 👑
