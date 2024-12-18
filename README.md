@@ -38,35 +38,40 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
    * [Authors 👨‍👨👱🏻‍♀️👩](#authors-)
    * [Supervisors 👩‍💼](#supervisors-)
    * [Project Description 👑](#project-description-)
+- [📄💊 AS24TeamPulse 💊📄](#-as24teampulse-)
+      - [Preamble — *Project AS2024*](#preamble--project-as2024)
+  - [Authors 👨‍👨👱🏻‍♀️👩](#authors-️)
+  - [Supervisors 👩‍💼](#supervisors-)
+  - [Table of contents](#table-of-contents)
+  - [Project Description 👑](#project-description-)
 - [AS-IS Process 🚩](#as-is-process-)
-   * [Roles 🎭](#roles-)
-   * [Workflow ⚡︎](#workflow-)
-   * [Goal 🎯](#goal-)
-   * [Stakeholders 💪](#stakeholders-)
-   * [User Stories / Scenario / case](#user-stories-scenario-case)
-      + [Assistant 👩🏼‍💻](#assistant-)
-      + [Client 🙋🏻‍♂️](#client-)
-      + [Risk Management 🚩](#risk-management-)
+  - [Roles 🎭](#roles-)
+  - [Workflow ⚡︎](#workflow-︎)
+  - [Goal 🎯](#goal-)
+  - [Stakeholders 💪](#stakeholders-)
+  - [User Stories / Scenario / case](#user-stories--scenario--case)
+    - [Assistant 👩🏼‍💻](#assistant-)
+    - [Client 🙋🏻‍♂️](#client-️)
+    - [Risk Management 🚩](#risk-management-)
 - [TO-BE Process 🚩](#to-be-process-)
-   * [Features 🧨](#features-)
-   * [Automated workflow 🚀](#automated-workflow-)
-   * [Receiving E-Mail with “MAKE” 📧](#receiving-e-mail-with-make-)
-   * [Deepnote 📝](#deepnote-)
-      + [Flask API for external service tasks 🧪](#flask-api-for-external-service-tasks-)
-      + [Database ⛁](#database-)
-   * [Camunda BPMN To Be Workflow 🏋](#camunda-bpmn-to-be-workflow-)
-      + [Risk Assessment with Decision Table 📊](#risk-assessment-with-decision-table-)
-         - [SL Decision Service 🤵](#sl-decision-service-)
-            * [Decision Flow ⚙️](#decision-flow-)
-         - [Example of a high-risk decision ⚠️](#example-of-a-high-risk-decision-)
-   * [LLM Generated Letters 💬](#llm-generated-letters-)
-   * [Limitations 🚧](#limitations-)
-   * [Conclusion 📝](#conclusion-)
-   * [Tools used 🔨:](#tools-used-)
-   * [Run the workflow ⚙️](#run-the-workflow-)
-   * [Further details 📖](#further-details-)
-   * [Knowledge Base 📚](#knowledge-base-)
-      + [Usage of AI 🤖](#usage-of-ai-)
+  - [Features 🧨](#features-)
+  - [Receiving E-Mail with "MAKE" 📧](#receiving-e-mail-with-make-)
+  - [Deepnote 📝](#deepnote-)
+    - [Flask API for external service tasks 🧪](#flask-api-for-external-service-tasks-)
+    - [Database ⛁](#database-)
+  - [Camunda BPMN To Be Workflow 🏋](#camunda-bpmn-to-be-workflow-)
+    - [Risk Assessment with Decision Table 📊](#risk-assessment-with-decision-table-)
+      - [SL Decision Service 🤵](#sl-decision-service-)
+        - [Decision Flow ⚙️](#decision-flow-️)
+      - [Example of a high-risk decision ⚠️](#example-of-a-high-risk-decision-️)
+  - [LLM Generated Letters 💬](#llm-generated-letters-)
+  - [Limitations 🚧](#limitations-)
+  - [Conclusion 📝](#conclusion-)
+  - [Tools used 🔨](#tools-used-)
+  - [Run the workflow ⚙️](#run-the-workflow-️)
+  - [Further details 📖](#further-details-)
+  - [Knowledge Base 📚](#knowledge-base-)
+    - [Usage of AI 🤖](#usage-of-ai-)
 
 
 ## Project Description 👑
@@ -179,17 +184,6 @@ Key features:
 - Storage of medication invoices in PDF format in Google Drive
 - Supports integration with external systems such as Deepnote and make.com for automated workflows
 - Generates and returns decision letters to the client
-
-
-## Automated workflow 🚀
-
-A new email to digibp.pulse.team@gmail.com initializes the process. In Make, the .pdf attachment of the email is parsed and the content is passed to the Flask API on Deepnote. In Deepnote, the invoice is added to the invoice table. This API also triggers the start event of the Camunda workflow.
-
-The first activity checks if the client is a customer of our health insurance. Secondly the medication is compared with a subset of the Swiss "Spezialitätenliste". This returns the reference price of the drug. If the GTIN is invalid or the client is not a client, a rejection message is sent to the healthcare provider. 
-
-After the initial checks, a risk calculation is performed based on the price difference between the "Spezialitätenliste" and the invoice. In addition, the client is given a drug abuse risk score, which compares the client's risk and whether the drug is addictive.
-
-If the risk is low, the assistant checks the invoice, and if the risk is high, the financial controller checks the invoice. The controller can approve or reject the invoice. Based on the decision, an e-mail is sent to the healthcare provider and the client. All messages are written by an LLM, who is given the necessary information on what to write. 
 
 ## Receiving E-Mail with "MAKE" 📧
 
@@ -377,10 +371,12 @@ In each of the above cases, a letter of individual denial will be generated usin
 - The Gmail module in [MAKE](https://www.make.com/en) expires on the 5th June 2025.
 - The make scenario fetches all incoming emails every 15 minutes. 
 
-## Conclusion 📝
+# Conclusion 📝
 
 The project automated the medication invoice processing workflow for a Swiss healthcare insurance company. By implementing automated email processing, PDF parsing, risk assessment, and LLM-generated decision letters, we have been able to significantly reduce the manual workload for administrative staff while accelerating response times for clients. The combination of multiple technologies (make, Camunda, Flask API) resulted in the creation of an end-to-end automated solution.
 
+
+# Project Information 
 ## Tools used 🔨
 
 - [MAKE](https://www.make.com/en)
@@ -438,7 +434,7 @@ As a second address to send / receive mails: digibp.pulse.peer@gmail.com with th
 - [GSL.ch](https://www.gs1.ch/en/industries/healthcare/pharmaceuticals)
 - [BAG.ch](https://www.bag.admin.ch/bag/en/home/versicherungen/krankenversicherung/krankenversicherung-leistungen-tarife/Arzneimittel.html)
 
-### Usage of AI 🤖
+## Usage of AI 🤖
 
 AI (particularly Claude, ChatGPT, and DeepL) was used as support for coding, writing and developing this solution. 
 Despite the support, our team has dedicated significant effort to developing this result.
