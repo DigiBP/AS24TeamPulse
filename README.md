@@ -1,6 +1,6 @@
 # 📄💊 AS24TeamPulse 💊📄
 
-#### Preamble - *Project AS2024*
+#### Preamble — *Project AS2024*
 
 This project aims to explore and implement innovative solutions to streamline healthcare processes through digital transformation, leveraging modern technologies to address real-world challenges in the industry. This project was enabled by the University of Applied Sciences and Arts Northwestern Switzerland (FHNW).
 
@@ -49,7 +49,7 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
 - [TO-BE Process 🚩](#to-be-process-)
    * [Features 🧨](#features-)
    * [Automated workflow 🚀](#automated-workflow-)
-   * [Receiving E-Mail with "MAKE" 📧](#receiving-e-mail-with-make-)
+   * [Receiving E-Mail with “MAKE” 📧](#receiving-e-mail-with-make-)
    * [Deepnote 📝](#deepnote-)
       + [Flask API for external service tasks 🧪](#flask-api-for-external-service-tasks-)
       + [Database ⛁](#database-)
@@ -57,7 +57,7 @@ The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#
       + [Risk Assessment with Decision Table 📊](#risk-assessment-with-decision-table-)
          - [SL Decision Service 🤵](#sl-decision-service-)
             * [Decision Flow ⚙️](#decision-flow-)
-         - [Example of a high risk decision ⚠️](#example-of-a-high-risk-decision-)
+         - [Example of a high-risk decision ⚠️](#example-of-a-high-risk-decision-)
    * [LLM Generated Letters 💬](#llm-generated-letters-)
    * [Limitations 🚧](#limitations-)
    * [Conclusion 📝](#conclusion-)
@@ -74,7 +74,7 @@ As a Swiss health insurance company, we automate the process of receiving and pr
 
 # AS-IS Process 🚩
 
-The current process is very time-consuming for the administrative assistant. For each invoice, he or she has to check if the client is a customer and if the drug has a valid GTIN number. And finally, they have to do a risk assessment based on a comparison with the official 'Spezialitätenliste,' which doesn't currently have an API interface.
+The current process is very time-consuming for the administrative assistant. For each invoice, he or she has to check if the client is a customer and if the drug has a valid GTIN number. And finally, they have to do a risk assessment based on a comparison with the official 'Spezialitätenliste,' which doesn't currently have an API.
 
 
 ## Roles 🎭
@@ -113,12 +113,12 @@ As described in this workflow, there are many tasks for the Assistant, which cou
 
 ## Goal 🎯
 
-The aim of this project is to create a faster and more automized process for the approval or denail of payments and the calculation of pharmaceutical invoices.
+The aim of this project is to create a faster and more automized process for the approval or denial of payments and the calculation of pharmaceutical invoices.
 
 
 ## Stakeholders 💪
 
-The main stakeholder is our insurance company, especially the administrative assistant, who gets a lot of support in performing repetitive, boring standard tasks. In addition, the client benefits from a very fast process cycle, receiving feedback on calculations and decisions. Finally, the doctor gets very quick feedback if there is an error in the invoice, with a description of the error.
+The main stakeholder is our insurance company, especially the administrative assistant, who gets a lot of support in performing repetitive, boring standard tasks. In addition, the client benefits from a very fast process cycle, receiving feedback on calculations and decisions. Finally, the doctor gets quick feedback if there is an error in the invoice, with a description of the error.
 
 
 ## User Stories / Scenario / case
@@ -133,7 +133,7 @@ so that I can save time and focus on other administrative tasks.
 Acceptance criteria:
 
 - The system retrieves email attachments and identifies valid PDF invoices.
-- PDF invoices are parsed into JSON objects, extracting key fields (e.g. client ID, medication, cost).
+- PDF invoices are parsed into JSON objects, extracting key fields (e.g., client ID, medication, cost).
 - Invalid or incomplete invoices are flagged with a reason and a notification is sent back to the healthcare provider.
 
 ### Client 🙋🏻‍♂️
@@ -145,8 +145,8 @@ so that I can manage my medical expenses without unnecessary delays.
 
 Approval criteria:
 
-- Client receive approval or denial letters via email within a pre-defined SLA (e.g. within 24 hours of invoice submission).
-- Denial letters clearly explain the reason (e.g. non-member, medication not on formulary).
+- Client receive approval or denial letters via email within a pre-defined SLA (e.g., within 24 hours of invoice submission).
+- Denial letters clearly explain the reason (e.g., non-member, medication not on formulary).
 - Approval letters include payment details and next steps for reimbursement.
 
 
@@ -154,27 +154,27 @@ Approval criteria:
 
 User Story 3: Financial Controller - Risk Escalation Management
 As a financial controller,
-I want to review high risk drug invoices flagged by the system,
+I want to review high-risk drug invoices flagged by the system,
 so that I can make informed decisions and ensure compliance with cost approval policies.
 
 Approval criteria:
 
-- The system flags high-risk invoices based on pre-defined rules (e.g. risk of drug abuse, high cost).
+- The system flags high-risk invoices based on pre-defined rules (e.g., risk of drug abuse, high cost).
 - Financial controllers are notified and provided with all relevant invoice and medication details.
 - Controllers can approve or reject the invoice, with the system generating an appropriate letter to the client.
 
 
 # TO-BE Process 🚩
 
-This chapter describes the new innovations in business process automation of the To Be Process. The aim is to reduce costs and save time in the approval process of our Swiss health insurance company pulse. Provide insight into the workflow and automation of tasks. It also serves as a guide for reproducibility. 
+This chapter describes the innovations in business process automation of the To Be Process. The aim is to reduce costs and save time in the approval process of our Swiss health insurance company pulse. Provide insight into the workflow and automation of tasks. It also serves as a guide for reproducibility. 
 
 ## Features 🧨
 
 Key features:
 - Automatically retrieves invoices from email attachments.
 - Reads and parses text from invoice PDFs into JSON objects
-- API to send invoice data to camunda and start the process
-- Stores client, invoice and medication data in a structured SQLite database.
+- API to send invoice data to Camunda and start the process
+- Stores client, invoice, and medication data in a structured SQLite database.
 - Storage of medication invoices in PDF format in Google Drive
 - Supports integration with external systems such as Deepnote and make.com for automated workflows
 - Generates and returns decision letters to the client
@@ -192,7 +192,7 @@ If the risk is low, the assistant checks the invoice, and if the risk is high, t
 
 ## Receiving E-Mail with "MAKE" 📧
 
-The [image](#makeReceive) below visualises the automated workflow in MAKE, including the modules. The process starts with the Gmail module monitoring incoming emails. Then the emails are filtered if the email attachment is a PDF. 
+The [image](#makeReceive) below visualizes the automated workflow in MAKE, including the modules. The process starts with the Gmail module monitoring incoming emails. Then the emails are filtered if the email attachment is a PDF. 
 
 The PDF files are routed to two actions, firstly uploading them directly to the digitbp.pulse.team@gmail.com Google Drive storage. This is used as a database to keep track of incoming invoices. The other path sends the PDF file to the PDF.co module. This module converts the information in the PDF file to JSON format, which is then passed to the JSON module to create a JSON object suitable for sending to an API using the HTTP post request module.
 
@@ -204,7 +204,7 @@ The PDF files are routed to two actions, firstly uploading them directly to the 
 
 ## Deepnote 📝
 
-The MAKE pipeline passes the JSON object to Deepnote with an http request.
+The MAKE pipeline passes the JSON object to Deepnote with an HTTP request.
 The API extracts the information from the JSON object and creates an entry in the Invoice table. The extracted values from the JSON object are then sent to the Camunda endpoint, which finally starts the Camunda [To Be](#ToBe) process. 
 
 ### Flask API for external service tasks 🧪
@@ -224,7 +224,7 @@ The API extracts the information from the JSON object and creates an entry in th
         <td>
             <pre>
 {   
-    ...
+    …
 }
             </pre>
         </td>
@@ -274,7 +274,7 @@ The API extracts the information from the JSON object and creates an entry in th
             <pre>
 {
     "found": true,
-    "medication": { ... }
+    "medication": { … }
 }
             </pre>
         </td>
@@ -299,7 +299,7 @@ The API extracts the information from the JSON object and creates an entry in th
 
 ### Database ⛁
 
-For this project, the medical billing and insurance management system designed specifically for the Swiss healthcare environment is represented by three tables, which are shown in [SQLite tables](#databases). The first table on the left is the Medication table, which stores details about medications, including a unique identifier (GTIN), manufacturer, description, substances, public price, and a drug abuse risk indicator. Using the GTIN number, the Invoice table in the middle links to the Medication table. This table records invoice data such as a unique invoice ID, an insurance number, a drug identifier, the date, the biller's email and the total amount. The Client table on the right is linked to the Invoice table via the insurance number and holds information about the client, including first and last name, address details, email and a risk score. 
+For this project, the medical billing and insurance management system designed specifically for the Swiss healthcare environment is represented by three tables, which are shown in [SQLite tables](#databases). The first table on the left is the Medication table, which stores details about medications, including a unique identifier (GTIN), manufacturer, description, substances, public price, and a drug abuse risk indicator. Using the GTIN number, the Invoice table in the middle links to the Medication table. This table records invoice data such as a unique invoice ID, an insurance number, a drug identifier, the date, the biller's email and the total amount. The Client table on the right is linked to the Invoice table via the insurance number and holds information about the client, including first and last name, address details, email, and a risk score. 
 
 <figure id = "databases">
   <img src="images/databases.png" alt="Screenshot of generated databases">
@@ -308,7 +308,7 @@ For this project, the medical billing and insurance management system designed s
 
 ## Camunda BPMN To Be Workflow 🏋
 
-Finally we arrive at the [To Be BPMN Workflow](#ToBe) in Camunda. The start is triggered by the HTTP request from Deepnote, which introduces the model with the invoice parameter from the invoice from the email. After receiving the invoice information from the API as JSON objects, the system checks if the client is a customer of our health insurance. If the client is in our database, it retrieves the drug information from the drug formulary and checks if the drug exists.
+Finally, we arrive at the [To Be BPMN Workflow](#ToBe) in Camunda. The start is triggered by the HTTP request from Deepnote, which introduces the model with the invoice parameter from the invoice from the email. After receiving the invoice information from the API as JSON objects, the system checks if the client is a customer of our health insurance. If the client is in our database, it retrieves the drug information from the drug formulary and checks if the drug exists.
 If any of the checks fail, a rejection message is generated with an LLM giving the healthcare provider an overview of why the invoice cannot be processed. 
 
 
@@ -342,20 +342,20 @@ The service adheres to Switzerland's 'Spezialitätenliste' (SL) rules for medica
 1. Assesses the risk based on the client profile and the potential for medication abuse.
 1. Returns the final approval based on all validations passing.
 
-#### Example of a high risk decision ⚠️
+#### Example of a high-risk decision ⚠️
 
 The [decision table](#highRiskDecision) is presented below. In this instance, the blue section illustrates the procedure for addressing a high-risk situation. This indicates that the invoice will be reviewed by the finance controller. 
 <figure id = "highRiskDecision">
   <img src="images/high_risk_decision.png" alt="decision of high risk on client">
-  <figcaption>Figure 6: Decision on high risk client.</figcaption>
+  <figcaption>Figure 6: Decision on high-risk client.</figcaption>
 </figure>
 
 
 ## LLM Generated Letters 💬
 
-A Large Language Model (LLM), specifically Zephyr 7B β by HuggingfaceH4, was trained to generate letters for cost approval or denial (see [Deepnote.com](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)). Should the process determine that the costs of the medication invoice are to be approved, the LLM will generate an approval letter and send it via an API to make.com. This will then automatically forward the letter to the client's email address using the Webhooks and Email modules.
+A Large Language Model (LLM), specifically Zephyr 7B β by HuggingfaceH4, was trained to generate letters for cost approval or denial (see [Deepnote.com](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)). Should the process determine that the costs of the medication invoice are to be approved, the LLM will generate an approval letter and send it via an API to MAKE.com. This will then automatically forward the letter to the client's email address using the Webhooks and Email modules.
 
-In the event that a cost approval is denied, this will be due to one of the following reasons:
+If a cost approval is denied, this will be due to one of the following reasons:
 - The client is not a member of our health insurance scheme.
 - The medication is not included in our database.
 - In the event of a high-risk detection, a higher authority may determine that the cost approval is not reasonable.
@@ -370,10 +370,10 @@ In each of the above cases, a letter of individual denial will be generated usin
 
 ## Limitations 🚧
 
-- The email **must** be completely empty and have the format of the Swiss Tarmed invoices (use provided templates on Google drive).
-- Due to time issues the project is limited to medication that have the Tarif 402 (GTIN code), even though tarif positions in the Tarmed system are not specifecly defined. 
-- The module PDF.co in [make](https://www.make.com/en) provides only limited tokens and expires on the 5th January 2025, and limited tokens (should be enough until it expires).
-- The Gmail module in [make](https://www.make.com/en) expires on the 5th June 2025.
+- The email **must** be empty and have the format of the Swiss TARMED invoices (use provided templates on Google Drive).
+- Due to time issues the project is limited to medication that have the "Tarif" 402 (GTIN code), even though "Tarif" positions in the TARMED system are not specific defined. 
+- The module PDF.co in [MAKE](https://www.make.com/en) provides only limited tokens and expires on the 5th January 2025, and limited tokens (should be enough until it expires).
+- The Gmail module in [MAKE](https://www.make.com/en) expires on the 5th June 2025.
 - The make scenario fetches all incoming emails every 15 minutes. 
 
 ## Conclusion 📝
@@ -382,7 +382,7 @@ The project automated the medication invoice processing workflow for a Swiss hea
 
 ## Tools used 🔨
 
-- [make](https://www.make.com/en)
+- [MAKE](https://www.make.com/en)
 - Camunda 7
 - [Deepnote (Python 3.9)](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Database-Creation-and-Population-888ec597bf47454587ad51d22219648e?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)
 - Google Mail
@@ -401,21 +401,21 @@ Step-by-step guide to run the workflow in Camunda:
 
 Good case scenario: 
 
-1. First check if the [make.com](https://eu2.make.com/1034263/scenarios?folder=all&tab=all) scenarios are running (1. Integration Gmail, 2. Send e-Mail).
+1. First check if the [MAKE.com](https://eu2.make.com/1034263/scenarios?folder=all&tab=all) scenarios are running (1. Integration Gmail, 2. Send e-Mail).
 
 1. Check if [deepnote.com](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02) is running.
 
 1. Check if [the Camunda workflow](https://digibp.engine.martinlab.science/camunda/app/tasklist/default/) engine is running.
 
-1. Sending an empty e-mail with an invoice PDF attachment to the address digitbp.pulse.team@gmail.com (in the format of Swiss invoices, Tarmed—example invoices are provided on the [Google Drive](https://drive.google.com/drive/folders/1zbCjgil0v--oFb20nrZZ77zMGt39m_4o) on the digitbp.pulse.team@gmail.com account)
+1. Sending an empty e-mail with an invoice PDF attachment to the address digitbp.pulse.team@gmail.com (in the format of Swiss invoices, TARMED—example invoices are provided on the [Google Drive](https://drive.google.com/drive/folders/1zbCjgil0v--oFb20nrZZ77zMGt39m_4o) on the digitbp.pulse.team@gmail.com account)
 
 1. Go to the [task list](https://digibp.engine.martinlab.science/camunda/app/tasklist/default/#/?searchQuery=%5B%5D&filter=f0945b62-643a-11ef-8ae6-fa163ee583d0&sorting=%5B%7B%22sortBy%22:%22created%22,%22sortOrder%22:%22desc%22%7D%5D&task=77cab653-ba23-11ef-b75f-fa163ee583d0&detailsTab=task-detail-form&viewbox=%7B%22Definitions_1kkn7mk%22:%7B%22x%22:153.80327868852459,%22y%22:-815.3469945355191,%22width%22:1819.672131147541,%22height%22:2628.415300546448%7D%7D) in Camunda.
 
-1. Based on the risk evaluation, the assistant or the finance controller can approve the invoice.
+1. Based on the risk evaluation, the assistant, or the finance controller can approve the invoice.
 
 1. After approving the invoice, two emails are generated.
 
-1. one for the client and one for the healthcare provider—the emails that are used are in the database and the one in the invoice of the healthcare provider
+1. one for the client and one for the healthcare provider—the emails that are used are in the database and the one in the invoice for the healthcare provider
 
 1. When the email is sent, the process ends.
 
