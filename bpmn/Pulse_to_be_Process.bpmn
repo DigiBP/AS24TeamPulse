@@ -3,7 +3,7 @@
   <bpmn:message id="Message_17lo717" name="Message_17lo717" />
   <bpmn:collaboration id="Collaboration_1ufn8c4">
     <bpmn:participant id="Participant_0ztons1" name="Insurance" processRef="Pulse_to_be_Process" />
-    <bpmn:participant id="Participant_1vxkdmc" name="Customer" />
+    <bpmn:participant id="Participant_1vxkdmc" name="Client" />
     <bpmn:participant id="Participant_0tsc98f" name="Healthcare Provider" />
     <bpmn:messageFlow id="Flow_0oov6ix" name="Receive invoice" sourceRef="Participant_0tsc98f" targetRef="start" />
     <bpmn:messageFlow id="Flow_0oms7ub" sourceRef="Activity_1hy65g9" targetRef="Participant_0tsc98f" />
@@ -371,12 +371,12 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
         <dc:Bounds x="160" y="340" width="1810" height="580" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0ctmnnz_di" bpmnElement="Lane_0ctmnnz" isHorizontal="true" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
-        <dc:Bounds x="190" y="340" width="1780" height="450" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1a5xmo1_di" bpmnElement="Lane_1a5xmo1" isHorizontal="true" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="190" y="790" width="1780" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0ctmnnz_di" bpmnElement="Lane_0ctmnnz" isHorizontal="true" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="190" y="340" width="1780" height="450" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1a1yw5b" bpmnElement="Activity_13wjw12">
@@ -606,12 +606,12 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
         <di:waypoint x="1468" y="509" />
         <di:waypoint x="1468" y="460" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="BPMNShape_1cn6f0j" bpmnElement="Participant_0tsc98f" isHorizontal="true" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
-        <dc:Bounds x="160" y="189" width="1810" height="60" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0wn0ef3_di" bpmnElement="Participant_1vxkdmc" isHorizontal="true" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
         <dc:Bounds x="160" y="79" width="1810" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1cn6f0j" bpmnElement="Participant_0tsc98f" isHorizontal="true" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="160" y="189" width="1810" height="60" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0wx7oow_di" bpmnElement="DataOutputAssociation_0wx7oow">
@@ -621,6 +621,10 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       <bpmndi:BPMNEdge id="DataOutputAssociation_19h6t94_di" bpmnElement="DataOutputAssociation_19h6t94">
         <di:waypoint x="700" y="570" />
         <di:waypoint x="700" y="525" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0xg57ml_di" bpmnElement="DataOutputAssociation_0xg57ml">
+        <di:waypoint x="1639" y="574" />
+        <di:waypoint x="1638" y="600" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0oov6ix_di" bpmnElement="Flow_0oov6ix">
         <di:waypoint x="260" y="249" />
@@ -636,10 +640,6 @@ medication_medication_risk_drug_abuse=object?.medication?.medication_risk_drug_a
       <bpmndi:BPMNEdge id="Flow_153lv1z_di" bpmnElement="Flow_153lv1z">
         <di:waypoint x="1640" y="494" />
         <di:waypoint x="1640" y="139" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0xg57ml_di" bpmnElement="DataOutputAssociation_0xg57ml">
-        <di:waypoint x="1639" y="574" />
-        <di:waypoint x="1638" y="600" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_061nm9u_di" bpmnElement="Flow_061nm9u">
         <di:waypoint x="550" y="430" />
