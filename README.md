@@ -1,5 +1,7 @@
 # AS24TeamPulse
+
 #### Preamble - *Project AS2024*
+
 This project aims to explore and implement innovative solutions to streamline healthcare processes through digital transformation, leveraging modern technologies to address real-world challenges in the industry. This project was facilitated  by the University of Applied Sciences and Arts Northwestern Switzerland (FHNW).
 
 <figure id = logo>
@@ -9,17 +11,19 @@ This project aims to explore and implement innovative solutions to streamline he
 
 
 ## Authors
-The contributing members of the **AS24TeamPulse** team are listed in the [Table 1](#authores), with their names and contact information. 
+
+The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#authores), with their names and contact information. 
 |**Name**|**Email**|
 |---|---|
 |Andreas Braun Ponce de Leon|andreas.braunponcedeleon@students.fhnw.ch|
 |Jetlinda Krasniqi|jetlinda.krasniqi@students.fhnw.ch|
 |Joëlle Höchle|joelle.hoechle@students.fhnw.ch|
-|Nicolas Bopp|nicolas.bopp@students.fhnw.ch|{authores}
+|Nicolas Bopp|nicolas.bopp@students.fhnw.ch|{#authores}
 
 
 
 ## Supervisors
+
 [Table 2](#supervisors) shows the names of the supervisors who provided guidance and expertise in the context of healthcare digitalization throughout the project.
 
 |**Name**|**Email**|
@@ -31,12 +35,16 @@ The contributing members of the **AS24TeamPulse** team are listed in the [Table 
 
 
 ## Project Description
+
 As a Swiss health insurance company, we automate the process of receiving and processing pharmaceutical invoices. This includes extracting invoices from email attachments and checking various conditions for payment approval or rejection. Using a large language model, the customer receives a generated decision letter that completes the process.
 
 # AS-IS Process
-The current process is very time-consuming for the administrative assistant. For each invoice, he or she has to check if the patient is a customer, check if the drug has a valid GTIN number. And finally, they have to do a risk assessment based on a comparison with the official 'Spezialitätenliste', which doesn't currently have an API interface.
+
+The current process is very time-consuming for the administrative assistant. For each invoice, he or she has to check if the patient is a customer and check if the drug has a valid GTIN number. And finally, they have to do a risk assessment based on a comparison with the official 'Spezialitätenliste,' which doesn't currently have an API interface.
+
 
 ## Roles
+
 Internal: 
 - Employee: Administrative Assistant
 - Higher Authority: Financial Controller
@@ -48,16 +56,17 @@ External:
 
 
 ## Workflow
-The current state of cost approval in the Swiss health insurance system includes many tasks that are not yet automated. It takes a considerable amount of time and effort to either accept or reject the process of drug cost validation. This state is modelled in [Image of the As Is Process](#asIs) and can also be found as [`bpmn-model`](bpmn/pulse_as_is_process_final.bpmn).
+
+The current state of cost approval in the Swiss health insurance system includes many tasks that are not yet automated. It takes a considerable amount of time and effort to either accept or reject the process of drug cost validation. This state is modeled in [Image of the As Is Process](#asIs) and can also be found as [`bpmn-model`](bpmn/pulse_as_is_process_final.bpmn).
 The process starts with the insurance company's administrative assistant receiving an email with an invoice attached. The assistant reads the invoice and checks the customer table to see if the person named on the invoice is a customer of the insurance company. 
 The first gateway shows two different scenarios:
-- If the person is not a client, the wizard informs the healthcare provider about the invalid claim and the process ends.
+- If the person is not a client, the wizard informs the healthcare provider about the invalid claim, and the process ends.
 - If the client exists in the table, the assistant checks the external Swiss [Spezialitätenliste] (https://www.xn--spezialittenliste-yqb.ch/) for the validity of the medication. If the medicine is invalid, the healthcare provider is informed and the process ends.
-For valid medicines, the process proceeds to the risk calculation stage;
+For valid medicines, the process proceeds to the risk calculation stage:
 - If the risk is low, the assistant checks the invoice and enters the information into the invoice table in the database.
 - If the risk is high, the process moves to the Financial Controller who decides whether to approve or reject the case:
   - If approved, the invoice information is sent back to the assistant, who inserts the data into the invoice table.
-  - If rejected, a message is sent to inform the provider of the rejection and the process is terminated.
+  - If rejected, a message is sent to inform the provider of the rejection, and the process is terminated.
 
 The best case is that the invoice is approved, which completes the process after notifying the healthcare provider and sending the notification and invoice to the customer.
 
@@ -69,15 +78,19 @@ The best case is that the invoice is approved, which completes the process after
 As described in this workflow, there are many tasks for the Assistant, which could be automated and more efficient.
 
 ## Goal
+
 The aim of this project is to create a faster and more atomized process for the denial or approval of payments and the calculation of pharmaceutical invoices.
 
 
 ## Stakeholders
+
 The main stakeholder is our insurance company, especially the administrative assistant, who gets a lot of support in performing repetitive, boring standard tasks. In addition, the client benefits from a very fast process cycle, receiving feedback on calculations and decisions. Finally, the doctor gets very quick feedback if there is an error in the invoice, with a description of the error.
 
 
 ## User Stories / Scenario / case
+
 ### Assistant
+
 User Story 1: Administrative assistant - invoice automation
 I am an administrative assistant at an insurance company,
 I would like the system to automatically process medication invoices from email attachments,
@@ -90,6 +103,7 @@ Acceptance criteria:
 - Invalid or incomplete invoices are flagged with a reason and a notification is sent back to the healthcare provider.
 
 ### Patient
+
 User Story 2: Patient - Fast response for drug approval
 As a patient with health insurance,
 I want to receive timely feedback on whether my medication costs have been approved or rejected,
@@ -103,6 +117,7 @@ Approval criteria:
 
 
 ### Risk Management
+
 User Story 3: Financial Controller - Risk Escalation Management
 As a financial controller,
 I want to review high risk drug invoices flagged by the system,
@@ -116,13 +131,8 @@ Approval criteria:
 
 
 # TO-BE Process
+
 This chapter describes the new innovations in business process automation of the To Be Process, see [image below](#ToBe). The aim is to reduce costs and save time in the approval process of our Swiss health insurance company pulse. Provide insight into the workflow and automation of tasks. It also serves as a guide for reproducibility. 
-
-<figure id= "ToBe">
-  <img src="images/Pulse_to_be_Process.png" alt="To-Be process diagram">
-  <figcaption>Figure 2:To-BE BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
-</figure>
-
 
 ## Features
 
@@ -137,6 +147,7 @@ Key features:
 
 
 ## Automated workflow
+
 A new email to digibp.pulse.team@gmail.com initializes the process. In "make", the .pdf attachment of the email is parsed and the content is passed to the Flask API on Deepnote. In Deepnote, the invoice is added to the invoice table. This API also triggers the start event of the Camunda workflow.
 
 The first activity checks if the patient is a customer of our health insurance. Secondly the medication is compared with a subset of the Swiss "Spezialitätenliste". This returns the reference price of the drug. If the GTIN is invalid or the patient is not a client, a rejection message is sent to the healthcare provider. 
@@ -146,6 +157,7 @@ After the initial checks, a risk calculation is performed based on the price dif
 If the risk is low, the assistant checks the invoice, and if the risk is high, the financial controller checks the invoice. The controller can approve or reject the invoice. Based on the decision, an e-mail is sent to the healthcare provider and the client. All messages are written by an LLM, who is given the necessary information on what to write. 
 
 ## Receiving E-Mail with "make"
+
 The [image](#makeReceive) below visualises the automated workflow in make, including the modules. The process starts with the Gmail module monitoring incoming emails. Then the emails are filtered if the email attachment is a PDF. 
 
 The PDF files are routed to two actions, firstly uploading them directly to the digitbp.pulse.team@gmail.com Google Drive storage. This is used as a database to keep track of incoming invoices. The other path sends the PDF file to the PDF.co module. This module converts the information in the PDF file to JSON format, which is then passed to the JSON module to create a JSON object suitable for sending to an API using the HTTP post request module.
@@ -155,24 +167,14 @@ The PDF files are routed to two actions, firstly uploading them directly to the 
   <figcaption>Figure 3: make workflow pipeline</figcaption>
 </figure>
 
+
 ## Forward to Deepnote
+
 The make pipeline passes the JSON object to Deepnote with an http request.
 The API extracts the information from the JSON object and creates an entry in the Invoice table. The extracted values from the JSON object are then sent to the Camunda endpoint, which finally starts the Camunda [To Be](#ToBe) process. 
 
-## Camunda BPMN To Be Workflow
-Finally we arrive at the [To Be BPMN Workflow](#ToBe) in camunda. The start is triggered by the HTTP request from Deepnote, which introduces the model with the invoice parameter from the invoice from the email. After receiving the invoice information from the API as JSON objects, the system checks if the patient is a customer of our health insurance. If the patient is in our database, it retrieves the drug information from the drug formulary and checks if the drug exists.
-If any of the checks fail, a rejection message is generated with an LLM giving the healthcare provider an overview of why the invoice cannot be processed. 
+### Flask API for external service tasks
 
-## Camunda CMN Risk evaluation
-There is also a risk assessment where the invoice is reviewed. To calculate the risk/benefit of approving the cost of the drug, and if the invoice is reasonable, the information goes through a [Decision Tree](#CMNiskevaluation) to automate this task. If there is a high risk, the task is escalated to a higher authority who will review the case and decide whether to approve or deny the cost, with an LLM generated letter to the customer. If the higher authority finds the invoice for reasonable or the decision is low risk, the system sends a positive response generated by LLM before closing.
-
-<figure id = "CMNiskevaluation">
-  <img src="images/riskevaluation.png" alt="Riskevaluation CMN">
-  <figcaption>Figure 4: CMN risk evaluation</figcaption>
-</figure>
-
-
-## Flask API for external service tasks
 <table width="900" id="endpoints">
     <tr>
         <th width="30"><b>Endpoint</b></th>
@@ -187,11 +189,8 @@ There is also a risk assessment where the invoice is reviewed. To calculate the 
         <td>Creates an invoice and starts a Camunda process</td>
         <td>
             <pre>
-{   "insurance_number" : 12345678,
-    "medication_GTIN" : 7680481641027,
-    "date" : "12.12.2024",
-    "biller_mail" : "digibp.pulse.peer@gmail.com",
-    "total_amount" : "100 CHF" 
+{   
+    ...
 }
             </pre>
         </td>
@@ -264,10 +263,8 @@ There is also a risk assessment where the invoice is reviewed. To calculate the 
     </tr>
 </table>
 
+### Database
 
-
-
-## Database
 For this project, the medical billing and insurance management system designed specifically for the Swiss healthcare environment is represented by three tables, which are shown in [SQLite tables](#databases). The first table on the left is the Medication table, which stores details about medications, including a unique identifier (GTIN), manufacturer, description, substances, public price, and a drug abuse risk indicator. Using the GTIN number, the Invoice table in the middle links to the Medication table. This table records invoice data such as a unique invoice ID, an insurance number, a drug identifier, the date, the biller's email and the total amount. The Client table on the right is linked to the Invoice table via the insurance number and holds information about the client, including first and last name, address details, email and a risk score. 
 
 <figure id = "databases">
@@ -275,9 +272,28 @@ For this project, the medical billing and insurance management system designed s
   <figcaption>Figure 5: SQLite healthcare database for patient records, invoicing, and medication tracking.</figcaption>
 </figure>
 
-## Decision Table
+## Camunda BPMN To Be Workflow
 
-### SL Decision Service
+Finally we arrive at the [To Be BPMN Workflow](#ToBe) in camunda. The start is triggered by the HTTP request from Deepnote, which introduces the model with the invoice parameter from the invoice from the email. After receiving the invoice information from the API as JSON objects, the system checks if the patient is a customer of our health insurance. If the patient is in our database, it retrieves the drug information from the drug formulary and checks if the drug exists.
+If any of the checks fail, a rejection message is generated with an LLM giving the healthcare provider an overview of why the invoice cannot be processed. 
+
+
+<figure id= "ToBe">
+  <img src="images/Pulse_to_be_Process.png" alt="To-Be process diagram">
+  <figcaption>Figure 2: To-BE BPMN model of the medication cost approval in the Swiss healthcare insurance company.</figcaption>
+</figure>
+
+### Risk Assessment with Decision Table
+
+There is also a risk assessment where the invoice is reviewed. To calculate the risk/benefit of approving the cost of the drug, and if the invoice is reasonable, the information goes through a [Decision Tree](#CMNiskevaluation) to automate this task. If there is a high risk, the task is escalated to a higher authority who will review the case and decide whether to approve or deny the cost, with an LLM generated letter to the customer. If the higher authority finds the invoice for reasonable or the decision is low risk, the system sends a positive response generated by LLM before closing.
+
+<figure id = "CMNiskevaluation">
+  <img src="images/riskevaluation.png" alt="Riskevaluation CMN">
+  <figcaption>Figure 4: CMN risk evaluation</figcaption>
+</figure>
+
+#### SL Decision Service
+
 The DMN-based decision service for medication validation evaluates the following:
 - Client eligibility and risk profile
 - Price validation against published rates
@@ -285,13 +301,15 @@ The DMN-based decision service for medication validation evaluates the following
 
 The service adheres to Switzerland's 'Spezialitätenliste' (SL) rules for medication reimbursement approval.
 
-#### Decision Flow
+##### Decision Flow
+
 1. Ensures that the patient is a valid client within the system.
 1. Compares the medication price to the published rates based on the SL.
 1. Assesses the risk based on the client profile and the potential for medication abuse.
 1. Returns the final approval based on all validations passing.
 
 #### Example of a high risk decision
+
 The [decision table](#highRiskDecision) is presented below. In this instance, the blue section illustrates the procedure for addressing a high-risk situation. This indicates that the invoice will be reviewed by the finance controller. 
 <figure id = "highRiskDecision">
   <img src="images/high_risk_decision.png" alt="decision of high risk on client">
@@ -300,6 +318,7 @@ The [decision table](#highRiskDecision) is presented below. In this instance, th
 
 
 ## LLM Generated Letters
+
 A Large Language Model (LLM), specifically Zephyr 7B β by HuggingfaceH4, was trained to generate letters for cost approval or denial (see [Deepnote.com](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Flask-API-2e1700317da443ed9c2cfcde4c9c98e1?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)). Should the process determine that the costs of the medication invoice are to be approved, the LLM will generate an approval letter and send it via an API to make.com. This will then automatically forward the letter to the client's email address using the Webhooks and Email modules.
 
 In the event that a cost approval is denied, this will be due to one of the following reasons:
@@ -316,6 +335,7 @@ In each of the above cases, a letter of individual denial will be generated usin
 
 
 ## Limitations
+
 - The email **must** be completely empty and have the format of the Swiss Tarmed invoices (use provided templates on Google drive).
 - Due to time issues the project is limited to medication that have the Tarif 402 (GTIN code), even though tarif positions in the Tarmed system are not specifecly defined. 
 - The module PDF.co in [make](https://www.make.com/en) provides only limited tokens and expires on the 5th January 2025, and limited tokens (should be enough until it expires).
@@ -323,9 +343,11 @@ In each of the above cases, a letter of individual denial will be generated usin
 - The make scenario fetches all incoming emails every 15 minutes. 
 
 ## Conclusion
+
 The project automated the medication invoice processing workflow for a Swiss healthcare insurance company. By implementing automated email processing, PDF parsing, risk assessment, and LLM-generated decision letters, we have been able to significantly reduce the manual workload for administrative staff while accelerating response times for clients. The combination of multiple technologies (make, Camunda, Flask API) resulted in the creation of an end-to-end automated solution.
 
 ## Tools used:
+
 - [make](https://www.make.com/en)
 - Camunda 7
 - [Deepnote (Python 3.9)](https://deepnote.com/workspace/Pulse-fec86550-0fb4-434a-b085-98ec6e3f16d5/project/Pulse-61e41b51-86e6-4811-87a3-550bb6414c02/notebook/Database-Creation-and-Population-888ec597bf47454587ad51d22219648e?utm_source=share-modal&utm_medium=product-shared-content&utm_campaign=notebook&utm_content=61e41b51-86e6-4811-87a3-550bb6414c02)
@@ -340,6 +362,7 @@ The project automated the medication invoice processing workflow for a Swiss hea
 - LLM: [Zephyr 7B β](https://huggingface.co/HuggingFaceH4/zephyr-7b-beta)
 
 ## Run the workflow
+
 Step-by-step guide to run the workflow in Camunda:
 
 Good case scenario: 
@@ -359,15 +382,18 @@ Bad-case scenario:
 
 
 ## Further details
+
 For this project the following email address was created and used as our healthcare insurance mail: digitbp.pulse.team@gmail.com 
 The password is provided in [Moodle](https://moodle.fhnw.ch/mod/assign/view.php?id=2442058).
 As a second address to send / receive mails: digibp.pulse.peer@gmail.com with the same password
 
 ## Knowledge Base 
+
 https://www.gs1.ch/en/industries/healthcare/pharmaceuticals
 
 https://www.bag.admin.ch/bag/en/home/versicherungen/krankenversicherung/krankenversicherung-leistungen-tarife/Arzneimittel.html
 
 ### Usage of AI
+
 AI (particularly Claude, ChatGPT and DeepL) was used as support for coding, writing and developing this solution. 
 Despite the support, our team has dedicated significant effort to developing this result.
