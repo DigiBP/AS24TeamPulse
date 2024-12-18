@@ -13,6 +13,7 @@ This project aims to explore and implement innovative solutions to streamline he
 ## Authors 👨‍👨👱🏻‍♀️👩
 
 The contributing members of the **AS24TeamPulse** team are listed in [Table 1](#authores), with their names and contact information. 
+
 |**Name**|**Email**|
 |---|---|
 |Andreas Braun Ponce de Leon|andreas.braunponcedeleon@students.fhnw.ch|
@@ -91,7 +92,7 @@ External:
 
 ## Workflow ⚡︎
 
-The current state of cost approval in the Swiss health insurance system includes many tasks that are not yet automated. It takes a considerable amount of time and effort to either accept or reject the process of drug cost validation. This state is modeled in [Image of the As Is Process](#asIs) and can also be found as [`bpmn-model`](bpmn/pulse_as_is_process_final.bpmn).
+The current state of cost approval in the Swiss health insurance system includes many tasks that are not yet automated. It takes a considerable amount of time and effort to either accept or reject the process of drug cost validation. This state is modeled in [Image of the As Is Process](#asIs) and can also be found as [`bpmn-model`](bpmn\Pulse_as_is_Process.bpmn).
 The process starts with the insurance company's administrative assistant receiving an email with an invoice attached. The assistant reads the invoice and checks the client table to see if the person named on the invoice is a client of the insurance company. 
 The first gateway shows two different scenarios:
 - If the person is not a client, the assistant informs the healthcare provider about the invalid claim, and the process ends.
@@ -308,7 +309,7 @@ For this project, the medical billing and insurance management system designed s
 
 ## Camunda BPMN To Be Workflow 🏋
 
-Finally, we arrive at the [To Be BPMN Workflow](#ToBe) in Camunda. The start is triggered by the HTTP request from Deepnote, which introduces the model with the invoice parameter from the invoice from the email. After receiving the invoice information from the API as JSON objects, the system checks if the client is a customer of our health insurance. If the client is in our database, it retrieves the drug information from the drug formulary and checks if the drug exists.
+Finally, we arrive at the [To Be BPMN Workflow](bpmn\Pulse_to_be_Process.bpmn) in Camunda. The start is triggered by the HTTP request from Deepnote, which introduces the model with the invoice parameter from the invoice from the email. After receiving the invoice information from the API as JSON objects, the system checks if the client is a customer of our health insurance. If the client is in our database, it retrieves the drug information from the drug formulary and checks if the drug exists.
 If any of the checks fail, a rejection message is generated with an LLM giving the healthcare provider an overview of why the invoice cannot be processed. 
 
 
