@@ -100,6 +100,20 @@
           <text>false</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_1h1w9zt">
+        <inputEntry id="UnaryTests_1m9zk37">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04vvdg6">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mna1iy">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03ptkqg">
+          <text>false</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <inputData id="InputData_13fpkch" name="client found" />
@@ -120,7 +134,7 @@
       <output id="OutputClause_0f2bcwk" name="client_validation" typeRef="boolean" />
       <rule id="DecisionRule_0z2disa">
         <inputEntry id="UnaryTests_0nym08f">
-          <text>client_found</text>
+          <text>true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0ro5aok">
           <text>true</text>
@@ -128,7 +142,7 @@
       </rule>
       <rule id="DecisionRule_05ebc1q">
         <inputEntry id="UnaryTests_1aenwqr">
-          <text>not(client_found)</text>
+          <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1122i9o">
           <text>false</text>
@@ -160,7 +174,7 @@
           <text>number(total_amount) &lt;= number(medication_pub_price)</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1p28h8o">
-          <text>medication_found</text>
+          <text>true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0ryem4b">
           <text>true</text>
@@ -171,7 +185,7 @@
           <text>number(total_amount) &gt; number(medication_pub_price)</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1xffn1u">
-          <text>medication_found</text>
+          <text>true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_04qms9q">
           <text>false</text>
@@ -182,7 +196,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0tprljz">
-          <text>not(medication_found)</text>
+          <text>false</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1030ani">
           <text>false</text>
